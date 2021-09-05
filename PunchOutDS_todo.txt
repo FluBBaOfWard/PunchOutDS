@@ -1,0 +1,21 @@
+PunchOutDS To do
+----------------
+
+
+
+Misc:
+	Add Coin2 for Arm Wrestling.
+	Record coin sounds.
+
+Grafik:
+
+CPU:
+	No decimal mode on 2A03.
+
+GUI:
+
+Sound:
+	Fix up 2A03, DMC, sweeps, triangle.
+	Fix VLM5030?
+
+Games:

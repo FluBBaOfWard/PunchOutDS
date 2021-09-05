@@ -1,0 +1,6 @@
+include
+PunchOutDS.xcodeproj/project.xcworkspace/xcuserdata
+*.elf
+*.nds
+*.zip
+build

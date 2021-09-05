@@ -1,0 +1,33 @@
+PunchOutDS revision history
+-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+
+
+V0.4.0 - 2021-03-28 (FluBBa)
+	Added rom loading of all games.
+	Added load/save state.
+
+V0.3.6 - 2020-06-08 (FluBBa)
+	Code cleanup.
+
+V0.3.5 - 2018-07-22 (FluBBa)
+	Updated Z80.
+
+V0.3.4 - 2018-07-10 (FluBBa)
+	Fixed mapping of buttons.
+	Fixed graphics for rev B roms.
+
+V0.3.2 - 2018-05-10 (FluBBa)
+	Added loading of roms from disc.
+
+V0.3.0 - 2018-05-02 (FluBBa)
+	Added support for Arm Wrestling.
+
+V0.2.0 - 2018-04-28 (FluBBa)
+	Fixed zooming.
+
+V0.1.0 - 2018-04-25 (FluBBa)
+	Fully playable.
+
+V0.0.0 - 2018-04-21 (FluBBa)
+	Started to code.
+
