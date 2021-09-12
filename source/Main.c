@@ -1,10 +1,10 @@
 #include <nds.h>
-#include <fat.h>
 
 #include <maxmod9.h>
 
 #include "Main.h"
 #include "Shared/EmuMenu.h"
+#include "Shared/FileHelper.h"
 #include "Shared/AsmExtra.h"
 #include "Gui.h"
 #include "FileHandling.h"
@@ -24,12 +24,8 @@ static void checkTimeOut(void);
 static void setupGraphics(void);
 static void setupStream(void);
 
-bool enableExit = FALSE;
-bool pauseEmulation = FALSE;
-int selectedGame = 0;
-int sleepTime = 60*60*5;			// 5min
 static int sleepTimer = 60*60*5;	// 5min
-static bool vBlankOverflow = FALSE;
+static bool vBlankOverflow = false;
 
 static mm_ds_system sys;
 static mm_stream myStream;
@@ -54,7 +50,7 @@ static const u8 guiPalette[] = {
 //---------------------------------------------------------------------------------
 void myVblank(void) {
 //---------------------------------------------------------------------------------
-	vBlankOverflow = TRUE;
+	vBlankOverflow = true;
 //	DC_FlushRange(EMUPALBUFF, 0x400);
 	vblIrqHandler();
 }
@@ -93,7 +89,6 @@ int main(int argc, char **argv) {
 			REG_BLDALPHA_SUB = 0x1004;
 			setupMenuPalette();
 		}
-//		mmStreamUpdate();
 	}    
 	return 0;
 }
@@ -112,7 +107,7 @@ void waitVBlank() {
 	if (!vBlankOverflow) {
 		swiIntrWait(1, IRQ_VBLANK);
 	}
-	vBlankOverflow = FALSE;
+	vBlankOverflow = false;
 }
 
 //---------------------------------------------------------------------------------

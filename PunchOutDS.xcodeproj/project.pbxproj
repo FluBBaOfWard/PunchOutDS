@@ -43,6 +43,7 @@
 		9C7BB97326012B3D00EA9C9C /* EmuFont.grit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EmuFont.grit; sourceTree = "<group>"; };
 		9C7BB97426012B3D00EA9C9C /* EmuFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EmuFont.png; sourceTree = "<group>"; };
 		9C8F3400248ACB7600996E5A /* nds_asm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nds_asm.h; sourceTree = "<group>"; };
+		9CBEE0D126EDE85B0095347A /* EmuSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmuSettings.h; sourceTree = "<group>"; };
 		A41716F2208BCF2D00EA6CA1 /* punchout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = punchout.cpp; sourceTree = "<group>"; };
 		A41716F3208BCF2D00EA6CA1 /* punchoutVideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = punchoutVideo.cpp; sourceTree = "<group>"; };
 		A4171727208C83A300EA6CA1 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 				9C7BB97226012B3D00EA9C9C /* graphics */,
 				A47F095D2087BFC0004E1DA6 /* unzip */,
 				9C8F3400248ACB7600996E5A /* nds_asm.h */,
+				9CBEE0D126EDE85B0095347A /* EmuSettings.h */,
 				A47F092820863384004E1DA6 /* EmuMenu.h */,
 				A47F092920863384004E1DA6 /* EmuMenu.c */,
 				A47F09642087BFC0004E1DA6 /* FileHelper.h */,

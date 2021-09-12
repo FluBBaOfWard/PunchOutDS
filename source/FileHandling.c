@@ -10,6 +10,8 @@
 
 #include "FileHandling.h"
 #include "Shared/EmuMenu.h"
+#include "Shared/EmuSettings.h"
+#include "Shared/FileHelper.h"
 #include "Shared/unzip/unzipnds.h"
 #include "Shared/EmubaseAC.h"
 #include "Main.h"
@@ -22,7 +24,10 @@
 static const char *const folderName = "acds";
 static const char *const settingName = "settings.cfg";
 
+static int selectedGame = 0;
 ConfigData cfg;
+
+static bool loadRoms(int gameNr, bool doLoad);
 
 //---------------------------------------------------------------------------------
 
@@ -49,7 +54,7 @@ int loadSettings() {
 	g_scaling    = cfg.scaling&1;
 	g_flicker    = cfg.flicker&1;
 	g_gammaValue = cfg.gammaValue;
-	emuSettings  = (cfg.emuSettings &~ 0xC0) ^ 0x100;	// Clear speed setting, XOR emu on bottom.
+	emuSettings  = (cfg.emuSettings & ~EMUSPEED_MASK) ^ MAIN_ON_BOTTOM;	// Clear speed setting, XOR emu on bottom.
 	sleepTime    = cfg.sleepTime;
 	joyCfg       = (joyCfg &~ 0x400)|((cfg.controller & 1)<<10);
 	strlcpy(currentDir, cfg.currentPath, sizeof(currentDir));
@@ -68,7 +73,7 @@ void saveSettings() {
 	cfg.scaling     = g_scaling&1;
 	cfg.flicker     = g_flicker&1;
 	cfg.gammaValue  = g_gammaValue;
-	cfg.emuSettings = (emuSettings &~ 0xC0) ^ 0x100;	// Clear speed setting, XOR emu on bottom.
+	cfg.emuSettings = (emuSettings & ~EMUSPEED_MASK) ^ MAIN_ON_BOTTOM;	// Clear speed setting, XOR emu on bottom.
 	cfg.sleepTime   = sleepTime;
 	cfg.controller  = (joyCfg>>10)&1;
 	strlcpy(cfg.currentPath, currentDir, sizeof(currentDir));
@@ -191,10 +196,10 @@ bool loadGame(int gameNr) {
 	selectedGame = gameNr;
 	setEmuSpeed(0);
 	loadCart(gameNr,0);
-	if ( emuSettings & 4 ) {
+	if ( emuSettings & AUTOLOAD_STATE ) {
 		loadState();
 	}
-	else if ( (emuSettings>>10) & 1 ) {
+	else if ( emuSettings & AUTOLOAD_NVRAM ) {
 		loadNVRAM();
 	}
 	return false;
