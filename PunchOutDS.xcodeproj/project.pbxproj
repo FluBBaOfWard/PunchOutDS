@@ -44,6 +44,7 @@
 		9C7BB97426012B3D00EA9C9C /* EmuFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EmuFont.png; sourceTree = "<group>"; };
 		9C8F3400248ACB7600996E5A /* nds_asm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nds_asm.h; sourceTree = "<group>"; };
 		9CBEE0D126EDE85B0095347A /* EmuSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmuSettings.h; sourceTree = "<group>"; };
+		9CBEE11426F3C2100095347A /* VLM503Asm.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = VLM503Asm.s; sourceTree = "<group>"; };
 		A41716F2208BCF2D00EA6CA1 /* punchout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = punchout.cpp; sourceTree = "<group>"; };
 		A41716F3208BCF2D00EA6CA1 /* punchoutVideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = punchoutVideo.cpp; sourceTree = "<group>"; };
 		A4171727208C83A300EA6CA1 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
@@ -158,6 +159,7 @@
 				A47FEA8320F5235100D47785 /* VLM5030_todo.txt */,
 				A47FEA8220F5235100D47785 /* History.txt */,
 				A47FEA8120F5235100D47785 /* Version.h */,
+				9CBEE11426F3C2100095347A /* VLM503Asm.s */,
 				A47AFF1A20DFAC200081DB4E /* vlm5030.h */,
 				A47AFF1920DFAC200081DB4E /* vlm5030.c */,
 			);

@@ -6,7 +6,7 @@ You should still be able to enjoy the games though. =)
 
 ## How to use:
 
-First DLDI patch the emulator for your flashcard.
+Depending on your flashcart you might have to DLDI patch the emulator.
 Create a folder named "acds" in either the root of your flash card or in the
 data folder. Now put punchout.zip/punchouta.zip/punchoutj.zip/punchita.zip/
 spnchout.zip/spnchouta.zip/spnchoutj.zip/armwrest.zip/ into a folder where

@@ -4,7 +4,6 @@
 #include "Shared/EmuMenu.h"
 #include "Shared/EmuSettings.h"
 #include "Shared/FileHelper.h"
-#include "Shared/AsmExtra.h"
 #include "Main.h"
 #include "FileHandling.h"
 #include "Cart.h"
@@ -12,6 +11,8 @@
 #include "io.h"
 #include "ARMZ80/Version.h"
 #include "ARM6502/Version.h"
+#include "N2A03/Version.h"
+#include "VLM5030/Version.h"
 
 #define EMUVERSION "V0.4.0 2021-09-12"
 
@@ -113,9 +114,11 @@ void uiAbout() {
 	drawText(" A:         Super punch",10,0);
 	drawText(" B:         Duck (Joystick up)",11,0);
 
-	drawText(" PunchOutDS " EMUVERSION, 21, 0);
-	drawText(" ARMZ80     " ARMZ80VERSION, 22, 0);
-	drawText(" ARM6502    " ARM6502VERSION, 23, 0);
+	drawText(" PunchOutDS " EMUVERSION, 19, 0);
+	drawText(" ARMZ80     " ARMZ80VERSION, 20, 0);
+	drawText(" ARM6502    " ARM6502VERSION, 21, 0);
+	drawText(" N2A03      " N2A03VERSION, 22, 0);
+	drawText(" VLM5030    " VLM5030VERSION, 23, 0);
 }
 
 void uiController() {
