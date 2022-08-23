@@ -3,7 +3,7 @@
 
 #include "Shared/nds_asm.h"
 #include "ARMZ80/ARMZ80.i"
-#include "ARM6502/m6502.i"
+#include "ARM6502/M6502.i"
 #include "PUVideo.i"
 
 	.global cpuReset
