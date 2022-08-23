@@ -1,4 +1,4 @@
-# PunchOutDS V0.4.0
+# PunchOutDS V0.4.1
 
 This is a Punch-Out!! - Arcade emulator for the Nintendo DS.
 It has bugs in the tile/palette rendering.

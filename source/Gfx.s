@@ -12,12 +12,12 @@
 	.global refreshGfx
 	.global endFrame
 	.global gfxState
-	.global g_gammaValue
+	.global gGammaValue
 //	.global oamBufferReady
-	.global g_scaling
-	.global g_twitch
-	.global g_flicker
-	.global g_gfxMask
+	.global gScaling
+	.global gTwitch
+	.global gFlicker
+	.global gGfxMask
 	.global vblIrqHandler
 	.global yStart
 	.global EMUPALBUFF
@@ -47,7 +47,7 @@ gfxInit:					;@ Called from machineInit
 	mov r2,#0x100
 	bl memset_					;@ No stray sprites please
 
-	ldr r0,=g_gammaValue
+	ldr r0,=gGammaValue
 	ldrb r0,[r0]
 	bl paletteInit				;@ Do palette mapping
 
@@ -441,7 +441,7 @@ vblIrqHandler:
 	stmfd sp!,{r4-r11,lr}
 	bl calculateFPS
 
-	ldrb r0,g_scaling
+	ldrb r0,gScaling
 	cmp r0,#0
 	moveq r6,#0
 	ldrne r6,=0x80000000 + ((GAME_HEIGHT-SCREEN_HEIGHT)*0x10000) / (SCREEN_HEIGHT-1)		;@ NDS 0x2B10 (was 0x2AAB)
@@ -450,9 +450,9 @@ vblIrqHandler:
 	add r8,r8,#0x10
 	mov r7,r8,lsl#16
 
-	ldr r0,g_flicker
+	ldr r0,gFlicker
 	eors r0,r0,r0,lsl#31
-	str r0,g_flicker
+	str r0,gFlicker
 	addpl r6,r6,r6,lsl#16
 
 	ldr r11,=scrollBuff
@@ -517,7 +517,7 @@ scrolLoop2:
 	strh r0,[r8,#REG_BG3PA]		;@ H scaling
 	strh r0,[r7,#REG_BG3PA]
 
-	ldrb r0,g_scaling
+	ldrb r0,gScaling
 	cmp r0,#0
 	moveq r3,#0x10000
 	ldrne r3,=0x12B10			;@ was 0x12AAB
@@ -530,7 +530,7 @@ scrolLoop2:
 	mul r2,r4,r2
 	mov r0,r5,lsl#6
 	add r0,r0,r2,lsr#2
-//	ldr r1,g_flicker
+//	ldr r1,gFlicker
 //	tst r1,#0x80000000
 //	addmi r0,r0,r4,lsr#3
 	str r0,[r8,#REG_BG3X]	;@ Opponent horizontal
@@ -559,7 +559,7 @@ scrolLoop2:
 	strh r1,[r7]
 
 	mov r0,#0x0013
-	ldrb r1,g_gfxMask
+	ldrb r1,gGfxMask
 	bic r0,r0,r1
 	strh r0,[r8,#REG_WININ]
 
@@ -568,12 +568,12 @@ scrolLoop2:
 
 
 ;@----------------------------------------------------------------------------
-g_flicker:		.byte 1
+gFlicker:		.byte 1
 				.space 2
-g_twitch:		.byte 0
+gTwitch:		.byte 0
 
-g_scaling:		.byte SCALED
-g_gfxMask:		.byte 0
+gScaling:		.byte SCALED
+gGfxMask:		.byte 0
 yStart:			.byte 0
 				.byte 0
 ;@----------------------------------------------------------------------------

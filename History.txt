@@ -2,6 +2,9 @@ PunchOutDS revision history
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
+V0.4.1 - 2022-08-23 (FluBBa)
+	Cleaned up source.
+
 V0.4.0 - 2021-03-28 (FluBBa)
 	Added rom loading of all games.
 	Added load/save state.

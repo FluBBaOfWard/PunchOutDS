@@ -193,7 +193,7 @@ static void setupGraphics() {
 }
 
 void setupMenuPalette() {
-	convertPalette(EMUPALBUFF+0x200, guiPalette, sizeof(guiPalette)/3, g_gammaValue);
+	convertPalette(EMUPALBUFF+0x200, guiPalette, sizeof(guiPalette)/3, gGammaValue);
 }
 
 //---------------------------------------------------------------------------------

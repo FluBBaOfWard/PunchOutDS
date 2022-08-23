@@ -170,7 +170,7 @@
 			isa = PBXGroup;
 			children = (
 				9C7BB97226012B3D00EA9C9C /* graphics */,
-				A47F095D2087BFC0004E1DA6 /* unzip */,
+				A47F095D2087BFC0004E1DA6 /* Unzip */,
 				9C8F3400248ACB7600996E5A /* nds_asm.h */,
 				9CBEE0D126EDE85B0095347A /* EmuSettings.h */,
 				A47F092820863384004E1DA6 /* EmuMenu.h */,
@@ -187,7 +187,7 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		A47F095D2087BFC0004E1DA6 /* unzip */ = {
+		A47F095D2087BFC0004E1DA6 /* Unzip */ = {
 			isa = PBXGroup;
 			children = (
 				A47F095F2087BFC0004E1DA6 /* puff.h */,
@@ -195,7 +195,7 @@
 				A47F09602087BFC0004E1DA6 /* unzipnds.h */,
 				A47F095E2087BFC0004E1DA6 /* unzipnds.c */,
 			);
-			path = unzip;
+			path = Unzip;
 			sourceTree = "<group>";
 		};
 		A47FEA7A20F4E31900D47785 /* N2A03 */ = {
@@ -322,7 +322,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVKITARM = $DEVKITPRO/devkitarm;
-				DEVKITPRO = /opt/devkitpro_old;
+				DEVKITPRO = /opt/devkitpro;
 				PRODUCT_NAME = PunchOutDS;
 			};
 			name = Debug;
