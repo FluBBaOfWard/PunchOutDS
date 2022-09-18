@@ -14,7 +14,7 @@
 #include "N2A03/Version.h"
 #include "VLM5030/Version.h"
 
-#define EMUVERSION "V0.4.1 2022-08-23"
+#define EMUVERSION "V0.4.1 2022-09-18"
 
 const fptr fnMain[] = {nullUI, subUI, subUI, subUI, subUI, subUI, subUI, subUI, subUI, subUI};
 

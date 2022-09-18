@@ -55,8 +55,7 @@ puFrameLoop:
 ;@----------------------------------------------------------------------------
 	ldr m6502optbl,=m6502OpTable
 	ldr r0,m6502CyclesPerScanline
-	b m6502RestoreAndRunXCycles
-puM6502End:
+	bl m6502RestoreAndRunXCycles
 	add r0,m6502optbl,#m6502Regs
 	stmia r0,{m6502nz-m6502pc,m6502zpage}	;@ Save M6502 state
 ;@--------------------------------------
@@ -140,11 +139,7 @@ cpuReset:		;@ Called by loadCart/resetGame
 	adr r4,cpuMapData+8
 	bl mapM6502Memory
 
-	adr r0,puM6502End
-	str r0,[m6502optbl,#m6502NextTimeout]
-	str r0,[m6502optbl,#m6502NextTimeout_]
-
-	mov r0,#0
+	mov r0,m6502optbl
 	bl m6502Reset
 
 	ldmfd sp!,{lr}

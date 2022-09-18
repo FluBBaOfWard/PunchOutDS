@@ -11,6 +11,8 @@
 		35E683AD1C66453300FCFE8A /* cpu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cpu.h; sourceTree = "<group>"; };
 		35E683AF1C664A6D00FCFE8A /* io.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = io.h; sourceTree = "<group>"; };
 		746D78E114ED9A8400CC738F /* Makefile */ = {isa = PBXFileReference; explicitFileType = sourcecode.make; fileEncoding = 4; path = Makefile; sourceTree = "<group>"; };
+		9C175BEC28B636E800293DA7 /* Version.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Version.h; sourceTree = "<group>"; };
+		9C175BED28B636E800293DA7 /* History.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = History.txt; sourceTree = "<group>"; };
 		9C29495E2610854500EDA7C9 /* EmubaseAC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmubaseAC.h; sourceTree = "<group>"; };
 		9C29495F2610854500EDA7C9 /* ArcadeRoms.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArcadeRoms.h; sourceTree = "<group>"; };
 		9C3D5AE325E4254A00E8CD56 /* History.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = History.txt; sourceTree = "<group>"; };
@@ -47,8 +49,6 @@
 		9CBEE11426F3C2100095347A /* VLM503Asm.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = VLM503Asm.s; sourceTree = "<group>"; };
 		A41716F2208BCF2D00EA6CA1 /* punchout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = punchout.cpp; sourceTree = "<group>"; };
 		A41716F3208BCF2D00EA6CA1 /* punchoutVideo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = punchoutVideo.cpp; sourceTree = "<group>"; };
-		A4171727208C83A300EA6CA1 /* version.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = version.h; sourceTree = "<group>"; };
-		A4171728208C83A300EA6CA1 /* history.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = history.txt; sourceTree = "<group>"; };
 		A417172A208C83A300EA6CA1 /* M6502mac.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M6502mac.h; sourceTree = "<group>"; };
 		A417172B208C83A300EA6CA1 /* M6502.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = M6502.h; sourceTree = "<group>"; };
 		A417172C208C83A300EA6CA1 /* M6502.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = M6502.s; sourceTree = "<group>"; };
@@ -131,10 +131,10 @@
 		A4171726208C83A300EA6CA1 /* ARM6502 */ = {
 			isa = PBXGroup;
 			children = (
-				9C4C21D526E5129B007D0280 /* README.md */,
 				A417172D208CB3F600EA6CA1 /* ARM6502_todo.txt */,
-				A4171728208C83A300EA6CA1 /* history.txt */,
-				A4171727208C83A300EA6CA1 /* version.h */,
+				9C4C21D526E5129B007D0280 /* README.md */,
+				9C175BED28B636E800293DA7 /* History.txt */,
+				9C175BEC28B636E800293DA7 /* Version.h */,
 				A417172B208C83A300EA6CA1 /* M6502.h */,
 				A4C265FA20A4D5BD003A2426 /* M6502.i */,
 				A417172A208C83A300EA6CA1 /* M6502mac.h */,
@@ -201,8 +201,8 @@
 		A47FEA7A20F4E31900D47785 /* N2A03 */ = {
 			isa = PBXGroup;
 			children = (
-				9C4C21D626E512A4007D0280 /* README.md */,
 				A47FEA8020F522A700D47785 /* N2A03_todo.txt */,
+				9C4C21D626E512A4007D0280 /* README.md */,
 				A47FEA7F20F522A700D47785 /* History.txt */,
 				A47FEA7E20F522A700D47785 /* Version.h */,
 				A47FEA7B20F4E31900D47785 /* N2A03.h */,
