@@ -9,7 +9,7 @@ extern "C" {
 
 #define GAME_COUNT (8)
 
-extern const ArcadeGame games[GAME_COUNT];
+extern const ArcadeGame punchoutGames[GAME_COUNT];
 
 /// This runs all save state functions for each chip.
 int packState(void *statePtr);

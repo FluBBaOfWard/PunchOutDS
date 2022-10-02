@@ -1,7 +1,7 @@
 #ifdef __arm__
 
 #include "Shared/nds_asm.h"
-#include "Equates.h"
+#include "Shared/EmuSettings.h"
 #include "ARMZ80/ARMZ80.i"
 #include "PUVideo.i"
 
@@ -12,7 +12,6 @@
 	.global refreshGfx
 	.global endFrame
 	.global gfxState
-	.global gGammaValue
 //	.global oamBufferReady
 	.global gScaling
 	.global gTwitch

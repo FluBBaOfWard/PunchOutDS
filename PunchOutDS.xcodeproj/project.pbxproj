@@ -26,7 +26,6 @@
 		9C4C21D526E5129B007D0280 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9C4C21D626E512A4007D0280 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9C4C21D726E512AB007D0280 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		9C50822D25D48EE800A8E1BA /* Equates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Equates.h; sourceTree = "<group>"; };
 		9C50822E25D48F2A00A8E1BA /* Gui.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gui.h; sourceTree = "<group>"; };
 		9C50822F25D48F2A00A8E1BA /* Main.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Main.c; sourceTree = "<group>"; };
 		9C50823025D48F2A00A8E1BA /* Main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Main.h; sourceTree = "<group>"; };
@@ -155,8 +154,8 @@
 		A47AFF1820DFAC200081DB4E /* VLM5030 */ = {
 			isa = PBXGroup;
 			children = (
-				9C4C21D726E512AB007D0280 /* README.md */,
 				A47FEA8320F5235100D47785 /* VLM5030_todo.txt */,
+				9C4C21D726E512AB007D0280 /* README.md */,
 				A47FEA8220F5235100D47785 /* History.txt */,
 				A47FEA8120F5235100D47785 /* Version.h */,
 				9CBEE11426F3C2100095347A /* VLM503Asm.s */,
@@ -220,11 +219,12 @@
 				A47FEA7A20F4E31900D47785 /* N2A03 */,
 				A47AFF1820DFAC200081DB4E /* VLM5030 */,
 				A47F092720863384004E1DA6 /* Shared */,
-				9C50822D25D48EE800A8E1BA /* Equates.h */,
 				9C50823025D48F2A00A8E1BA /* Main.h */,
 				9C50822F25D48F2A00A8E1BA /* Main.c */,
 				9C50822E25D48F2A00A8E1BA /* Gui.h */,
 				9C50823125D48F2A00A8E1BA /* Gui.c */,
+				9C50823A25D48F7400A8E1BA /* FileHandling.h */,
+				9C50823925D48F7400A8E1BA /* FileHandling.c */,
 				9C7BB96C2600D15B00EA9C9C /* PunchOut.h */,
 				9C7BB96B2600D15B00EA9C9C /* PunchOut.c */,
 				9C50823225D48F2A00A8E1BA /* Cart.h */,
@@ -243,8 +243,6 @@
 				A417172F208D048400EA6CA1 /* PUVideo.i */,
 				A4171730208D048500EA6CA1 /* PUVideo.s */,
 				9C50823825D48F7400A8E1BA /* Memory.s */,
-				9C50823A25D48F7400A8E1BA /* FileHandling.h */,
-				9C50823925D48F7400A8E1BA /* FileHandling.c */,
 			);
 			path = source;
 			sourceTree = "<group>";
@@ -252,8 +250,8 @@
 		A49D34311757E54900BD9B4B /* ARMZ80 */ = {
 			isa = PBXGroup;
 			children = (
-				9C4C21D426E51292007D0280 /* README.md */,
 				35A0A3BE1B09ECDE0020DE95 /* ARMZ80_todo.txt */,
+				9C4C21D426E51292007D0280 /* README.md */,
 				9C3D5AE325E4254A00E8CD56 /* History.txt */,
 				9C3D5AE725E4254B00E8CD56 /* Version.h */,
 				9C3D5AE825E4254B00E8CD56 /* ARMZ80.h */,

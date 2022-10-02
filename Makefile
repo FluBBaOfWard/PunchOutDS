@@ -37,7 +37,7 @@ GRAPHICS	:=	graphics \
 # options for code generation
 #---------------------------------------------------------------------------------
 ARCH	:=	-march=armv5te -mtune=arm946e-s -mthumb -mthumb-interwork
-FLAGS	:=	-DARM9 -DNDS -DCPU_N2A03
+FLAGS	:=	-DARM9 -DNDS -DZ80_USE_FAST_MEM -DCPU_N2A03 -DNO_FASTMEM_6502
 
 CFLAGS	:=	-g -Wall -O2 \
 			-fomit-frame-pointer \

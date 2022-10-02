@@ -46,13 +46,13 @@ int getStateSize() {
 }
 
 static const ArcadeRom punchoutRoms[42] = {
-	// ROM_REGION( 0x10000, "maincpu", 0 )     /* 64k for code */
+	// ROM_REGION( 0x10000, "maincpu", 0 )     // 64k for code
 	{"chp1-c.8l",    0x2000, 0xa4003adc},
 	{"chp1-c.8k",    0x2000, 0x745ecf40},
 	{"chp1-c.8j",    0x2000, 0x7a7f870e},
 	{"chp1-c.8h",    0x2000, 0x5d8123d7},
 	{"chp1-c.8f",    0x4000, 0xc8a55ddb},
-	// ROM_REGION( 0x10000, "audiocpu", 0 )    /* 64k for the sound CPU */
+	// ROM_REGION( 0x10000, "audiocpu", 0 )    // 64k for the sound CPU
 	{"chp1-c.4k",    0x2000, 0xcb6ef376},
 	// ROM_REGION( 0x04000, "gfx1", ROMREGION_ERASEFF )
 	{"chp1-b.4c",    0x2000, 0x49b763bc},
@@ -91,15 +91,15 @@ static const ArcadeRom punchoutRoms[42] = {
 	{"chp1-v.8n",    0x2000, 0x1c0d09aa},
 	//{FILL0XFF,       0x4000, 0x00000000},
 
-	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // see driver notes
-	// pink labeled color proms
+	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // See driver notes
+	// Pink labeled color proms
 	{"chp1-b-6e_pink.6e",  0x0200, 0xe9ca3ac6},
 	{"chp1-b-6f_pink.6f",  0x0200, 0x02be56ab},
 	{"chp1-b-7f_pink.7f",  0x0200, 0x11de55f1},
 	{"chp1-b-7e_pink.7e",  0x0200, 0xfddaa777},
 	{"chp1-b-8e_pink.8e",  0x0200, 0xc3d5d71f},
 	{"chp1-b-8f_pink.8f",  0x0200, 0xa3037155},
-	// white labeled color proms (indices are reversed)
+	// White labeled color proms (indices are reversed)
 	//{"chp1-b-6e_white.6e", 0x0200, 0xddac5f0e},
 	//{"chp1-b-6f_white.6f", 0x0200, 0x846c6261},
 	//{"chp1-b-7f_white.7f", 0x0200, 0x1682dd30},
@@ -107,18 +107,18 @@ static const ArcadeRom punchoutRoms[42] = {
 	//{"chp1-b-8e_white.8e", 0x0200, 0xb0fc15a8},
 	//{"chp1-b-8f_white.8f", 0x0200, 0x1ffd894a},
 	{"chp1-v-2d.2d",       0x0100, 0x71dc0d48},
-	// ROM_REGION( 0x4000, "vlm", 0 )  /* 16k for the VLM5030 data */
+	// ROM_REGION( 0x4000, "vlm", 0 )  // 16k for the VLM5030 data
 	{"chp1-c.6p",    0x4000, 0xea0bbb31},
 };
 
 static const ArcadeRom punchoutaRoms[42] = {
-	// ROM_REGION( 0x10000, "maincpu", 0 )     /* 64k for code */
+	// ROM_REGION( 0x10000, "maincpu", 0 )     // 64k for code
 	{"chp1-c.8l",    0x2000, 0xa4003adc},
 	{"chp1-c.8k",    0x2000, 0x745ecf40},
 	{"chp1-c.8j",    0x2000, 0x7a7f870e},
 	{"chp1-c.8h",    0x2000, 0x5d8123d7},
 	{"chp1-c.8f",    0x4000, 0xc8a55ddb},
-	// ROM_REGION( 0x10000, "audiocpu", 0 )    /* 64k for the sound CPU */
+	// ROM_REGION( 0x10000, "audiocpu", 0 )    // 64k for the sound CPU
 	{"chp1-c.4k",    0x2000, 0xcb6ef376},
 	// ROM_REGION( 0x04000, "gfx1", ROMREGION_ERASEFF | ROMREGION_INVERT )
 	{"chp1-b.4c",    0x2000, 0xe26dc8b3},
@@ -154,15 +154,15 @@ static const ArcadeRom punchoutaRoms[42] = {
 	{"chp1-v.8p",    0x2000, 0xc2db5b4e},
 	{"chp1-v.8n",    0x2000, 0xe6af390e},
 	//{FILL0XFF,       0x4000, 0x00000000},
-	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // see driver notes
-	// pink labeled color proms
+	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // See driver notes
+	// Pink labeled color proms
 	{"chp1-b-6e_pink.6e",  0x0200, 0xe9ca3ac6},
 	{"chp1-b-6f_pink.6f",  0x0200, 0x02be56ab},
 	{"chp1-b-7f_pink.7f",  0x0200, 0x11de55f1},
 	{"chp1-b-7e_pink.7e",  0x0200, 0xfddaa777},
 	{"chp1-b-8e_pink.8e",  0x0200, 0xc3d5d71f},
 	{"chp1-b-8f_pink.8f",  0x0200, 0xa3037155},
-	// white labeled color proms (indices are reversed)
+	// White labeled color proms (indices are reversed)
 	//{"chp1-b-6e_white.6e", 0x0200, 0xddac5f0e},
 	//{"chp1-b-6f_white.6f", 0x0200, 0x846c6261},
 	//{"chp1-b-7f_white.7f", 0x0200, 0x1682dd30},
@@ -170,18 +170,18 @@ static const ArcadeRom punchoutaRoms[42] = {
 	//{"chp1-b-8e_white.8e", 0x0200, 0xb0fc15a8},
 	//{"chp1-b-8f_white.8f", 0x0200, 0x1ffd894a},
 	{"chp1-v-2d.2d",       0x0100, 0x71dc0d48},
-	// ROM_REGION( 0x4000, "vlm", 0 )  /* 16k for the VLM5030 data */
+	// ROM_REGION( 0x4000, "vlm", 0 )  // 16k for the VLM5030 data
 	{"chp1-c.6p",    0x4000, 0xea0bbb31},
 };
 
 static const ArcadeRom punchoutjRoms[42] = {
-	// ROM_REGION( 0x10000, "maincpu", 0 )     /* 64k for code */
+	// ROM_REGION( 0x10000, "maincpu", 0 )     // 64k for code
 	{"chp1-c_8l_a.8l", 0x2000, 0x9735eb5a},
 	{"chp1-c_8k_a.8k", 0x2000, 0x98baba41},
 	{"chp1-c_8j_a.8j", 0x2000, 0x7a7f870e},
 	{"chp1-c_8h_a.8h", 0x2000, 0x5d8123d7},
 	{"chp1-c_8f_a.8f", 0x4000, 0xea52cda1},
-	// ROM_REGION( 0x10000, "audiocpu", 0 )    /* 64k for the sound CPU */
+	// ROM_REGION( 0x10000, "audiocpu", 0 )    // 64k for the sound CPU
 	{"chp1-c_4k_a.4k", 0x2000, 0xcb6ef376},
 	// ROM_REGION( 0x04000, "gfx1", ROMREGION_ERASEFF | ROMREGION_INVERT )
 	{"chp1-b_4c_a.4c", 0x2000, 0xe26dc8b3},
@@ -217,15 +217,15 @@ static const ArcadeRom punchoutjRoms[42] = {
 	{"chp1-v_8p_a.8p", 0x2000, 0xc2db5b4e},
 	{"chp1-v_8n_a.8n", 0x2000, 0xe6af390e},
 	//{FILL0XFF,       0x4000, 0x00000000},
-	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // see driver notes
-	// pink labeled color proms
+	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // See driver notes
+	// Pink labeled color proms
 	{"chp1-b-6e_pink.6e",  0x0200, 0xe9ca3ac6},
 	{"chp1-b-6f_pink.6f",  0x0200, 0x02be56ab},
 	{"chp1-b-7f_pink.7f",  0x0200, 0x11de55f1},
 	{"chp1-b-7e_pink.7e",  0x0200, 0xfddaa777},
 	{"chp1-b-8e_pink.8e",  0x0200, 0xc3d5d71f},
 	{"chp1-b-8f_pink.8f",  0x0200, 0xa3037155},
-	// white labeled color proms (indices are reversed)
+	// White labeled color proms (indices are reversed)
 	//{"chp1-b-6e_white.6e", 0x0200, 0xddac5f0e},
 	//{"chp1-b-6f_white.6f", 0x0200, 0x846c6261},
 	//{"chp1-b-7f_white.7f", 0x0200, 0x1682dd30},
@@ -233,18 +233,18 @@ static const ArcadeRom punchoutjRoms[42] = {
 	//{"chp1-b-8e_white.8e", 0x0200, 0xb0fc15a8},
 	//{"chp1-b-8f_white.8f", 0x0200, 0x1ffd894a},
 	{"chp1-v-2d.2d",       0x0100, 0x71dc0d48},
-	// ROM_REGION( 0x4000, "vlm", 0 )  /* 16k for the VLM5030 data */
+	// ROM_REGION( 0x4000, "vlm", 0 )  // 16k for the VLM5030 data
 	{"chp1-c_6p_a.6p",  0x4000, 0x597955ca},
 };
 
 static const ArcadeRom punchitaRoms[42] = {
-	// ROM_REGION( 0x10000, "maincpu", 0 )     /* 64k for code */
+	// ROM_REGION( 0x10000, "maincpu", 0 )     // 64k for code
 	{"chp1-c.8l",    0x2000, 0x1d595ce2},
 	{"chp1-c.8k",    0x2000, 0xc062fa5c},
 	{"chp1-c.8j",    0x2000, 0x48d453ef},
 	{"chp1-c.8h",    0x2000, 0x67f5aedc},
 	{"chp1-c.8f",    0x4000, 0x761de4f3},
-	// ROM_REGION( 0x10000, "audiocpu", 0 )    /* 64k for the sound CPU */
+	// ROM_REGION( 0x10000, "audiocpu", 0 )    // 64k for the sound CPU
 	{"chp1-c.4k",    0x2000, 0xcb6ef376},
 	// ROM_REGION( 0x04000, "gfx1", ROMREGION_ERASEFF )
 	{"chp1-b.4c",    0x2000, 0x9a9ff1d3},
@@ -280,15 +280,15 @@ static const ArcadeRom punchitaRoms[42] = {
 	{"chp1-v.8p",    0x2000, 0x4cb7ea82},
 	{"chp1-v.8n",    0x2000, 0x1c0d09aa},
 	//{FILL0XFF,     0x4000, 0x00000000},
-	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // see driver notes
-	// pink labeled color proms
+	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // See driver notes
+	// Pink labeled color proms
 	{"chp1-b-6e_pink.6e",  0x0200, 0xe9ca3ac6},
 	{"chp1-b-6f_pink.6f",  0x0200, 0x02be56ab},
 	{"chp1-b-7f_pink.7f",  0x0200, 0x11de55f1},
 	{"chp1-b-7e_pink.7e",  0x0200, 0xfddaa777},
 	{"chp1-b-8e_pink.8e",  0x0200, 0xc3d5d71f},
 	{"chp1-b-8f_pink.8f",  0x0200, 0xa3037155},
-	// white labeled color proms (indices are reversed)
+	// White labeled color proms (indices are reversed)
 	//{"chp1-b-6e_white.6e", 0x0200, 0xddac5f0e},
 	//{"chp1-b-6f_white.6f", 0x0200, 0x846c6261},
 	//{"chp1-b-7f_white.7f", 0x0200, 0x1682dd30},
@@ -296,18 +296,18 @@ static const ArcadeRom punchitaRoms[42] = {
 	//{"chp1-b-8e_white.8e", 0x0200, 0xb0fc15a8},
 	//{"chp1-b-8f_white.8f", 0x0200, 0x1ffd894a},
 	{"chp1-v-2d.2d",       0x0100, 0x71dc0d48},
-	// ROM_REGION( 0x4000, "vlm", 0 )  /* 16k for the VLM5030 data */
+	// ROM_REGION( 0x4000, "vlm", 0 )  // 16k for the VLM5030 data
 	{"chp1-c.6p",    0x4000, 0xea0bbb31},
 };
 
 static const ArcadeRom spnchoutRoms[40] = {
-	// ROM_REGION( 0x10000, "maincpu", 0 )     /* 64k for code */
+	// ROM_REGION( 0x10000, "maincpu", 0 )     // 64k for code
 	{"chs1-c.8l",    0x2000, 0x703b9780},
 	{"chs1-c.8k",    0x2000, 0xe13719f6},
 	{"chs1-c.8j",    0x2000, 0x1fa629e8},
 	{"chs1-c.8h",    0x2000, 0x15a6c068},
 	{"chs1-c.8f",    0x4000, 0x4ff3cdd9},
-	//ROM_REGION( 0x10000, "audiocpu", 0 )    /* 64k for the sound CPU */
+	//ROM_REGION( 0x10000, "audiocpu", 0 )    // 64k for the sound CPU
 	{"chp1-c.4k",    0x2000, 0xcb6ef376},
 	// ROM_REGION( 0x04000, "gfx1", ROMREGION_ERASEFF )
 	{"chs1-b.4c",    0x2000, 0x9f2ede2d},
@@ -341,15 +341,15 @@ static const ArcadeRom spnchoutRoms[40] = {
 	{"chp1-v.8p",    0x2000, 0x4cb7ea82},
 	{"chp1-v.8n",    0x2000, 0x1c0d09aa},
 	//{FILL0XFF,       0x4000, 0x00000000},
-	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // see driver notes
-	// pink labeled color proms
+	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // See driver notes
+	// Pink labeled color proms
 	{"chs1-b-6e_pink.6e",  0x0200, 0x0ad4d727},
 	{"chs1-b-6f_pink.6f",  0x0200, 0x86f5cfdb},
 	{"chs1-b-7f_pink.7f",  0x0200, 0x8bd406f8},
 	{"chs1-b-7e_pink.7e",  0x0200, 0x4c7e3a67},
 	{"chs1-b-8e_pink.8e",  0x0200, 0xec659313},
 	{"chs1-b-8f_pink.8f",  0x0200, 0x8b493c09},
-	// white labeled color proms (indices are reversed)
+	// White labeled color proms (indices are reversed)
 	//{"chs1-b-6e_white.6e", 0x0200, 0x8efd867f},
 	//{"chs1-b-6f_white.6f", 0x0200, 0x279d6cbc},
 	//{"chs1-b-7f_white.7f", 0x0200, 0xcad6b7ad},
@@ -357,18 +357,18 @@ static const ArcadeRom spnchoutRoms[40] = {
 	//{"chs1-b-8e_white.8e", 0x0200, 0x3a2e333b},
 	//{"chs1-b-8f_white.8f", 0x0200, 0x1663eed7},
 	{"chs1-v.2d",          0x0100, 0x71dc0d48},
-	// ROM_REGION( 0x4000, "vlm", 0 )  /* 16k for the VLM5030 data */
+	// ROM_REGION( 0x4000, "vlm", 0 )  // 16k for the VLM5030 data
 	{"chs1-c.6p",    0x4000, 0xad8b64b8},
 };
 
 static const ArcadeRom spnchoutaRoms[40] = {
-	// ROM_REGION( 0x10000, "maincpu", 0 )     /* 64k for code */
+	// ROM_REGION( 0x10000, "maincpu", 0 )     // 64k for code
 	{"chs1-c.8l",    0x2000, 0x703b9780},
 	{"chs1-c.8k",    0x2000, 0xe13719f6},
 	{"chs1-c.8j",    0x2000, 0x1fa629e8},
 	{"chs1-c.8h",    0x2000, 0x15a6c068},
 	{"chs1-c.8f",    0x4000, 0x4ff3cdd9},
-	// ROM_REGION( 0x10000, "audiocpu", 0 )    /* 64k for the sound CPU */
+	// ROM_REGION( 0x10000, "audiocpu", 0 )    // 64k for the sound CPU
 	{"chp1-c.4k",    0x2000, 0xcb6ef376},
 	// ROM_REGION( 0x04000, "gfx1", ROMREGION_ERASEFF | ROMREGION_INVERT )
 	{"chs1-b.4c",    0x2000, 0xb017e1e9},
@@ -402,15 +402,15 @@ static const ArcadeRom spnchoutaRoms[40] = {
 	{"chp1-v.8p",    0x2000, 0xc2db5b4e},
 	{"chp1-v.8n",    0x2000, 0xe6af390e},
 	//{FILL0XFF,       0x4000, 0x00000000},
-	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // see driver notes
-	// pink labeled color proms
+	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // See driver notes
+	// Pink labeled color proms
 	{"chs1-b-6e_pink.6e",  0x0200, 0x0ad4d727},
 	{"chs1-b-6f_pink.6f",  0x0200, 0x86f5cfdb},
 	{"chs1-b-7f_pink.7f",  0x0200, 0x8bd406f8},
 	{"chs1-b-7e_pink.7e",  0x0200, 0x4c7e3a67},
 	{"chs1-b-8e_pink.8e",  0x0200, 0xec659313},
 	{"chs1-b-8f_pink.8f",  0x0200, 0x8b493c09},
-	// white labeled color proms (indices are reversed)
+	// White labeled color proms (indices are reversed)
 	//{"chs1-b-6e_white.6e", 0x0200, 0x8efd867f},
 	//{"chs1-b-6f_white.6f", 0x0200, 0x279d6cbc},
 	//{"chs1-b-7f_white.7f", 0x0200, 0xcad6b7ad},
@@ -418,18 +418,18 @@ static const ArcadeRom spnchoutaRoms[40] = {
 	//{"chs1-b-8e_white.8e", 0x0200, 0x3a2e333b},
 	//{"chs1-b-8f_white.8f", 0x0200, 0x1663eed7},
 	{"chs1-v.2d",          0x0100, 0x71dc0d48},
-	// ROM_REGION( 0x4000, "vlm", 0 )  /* 16k for the VLM5030 data */
+	// ROM_REGION( 0x4000, "vlm", 0 )  // 16k for the VLM5030 data
 	{"chs1-c.6p",    0x4000, 0xad8b64b8},
 };
 
 static const ArcadeRom spnchoutjRoms[40] = {
-	// ROM_REGION( 0x10000, "maincpu", 0 )     /* 64k for code */
+	// ROM_REGION( 0x10000, "maincpu", 0 )     // 64k for code
 	{"chs1c8la.bin", 0x2000, 0xdc2a592b},
 	{"chs1c8ka.bin", 0x2000, 0xce687182},
 	{"chs1-c.8j",    0x2000, 0x1fa629e8},
 	{"chs1-c.8h",    0x2000, 0x15a6c068},
 	{"chs1c8fa.bin", 0x4000, 0xf745b5d5},
-	// ROM_REGION( 0x10000, "audiocpu", 0 )    /* 64k for the sound CPU */
+	// ROM_REGION( 0x10000, "audiocpu", 0 )    // 64k for the sound CPU
 	{"chp1-c.4k",    0x2000, 0xcb6ef376},
 	// ROM_REGION( 0x04000, "gfx1", ROMREGION_ERASEFF | ROMREGION_INVERT )
 	{"b_4c_01a.bin", 0x2000, 0xb017e1e9},
@@ -463,15 +463,15 @@ static const ArcadeRom spnchoutjRoms[40] = {
 	{"chp1-v.8p",    0x2000, 0x4cb7ea82},
 	{"chp1-v.8n",    0x2000, 0x1c0d09aa},
 	//{FILL0XFF,       0x4000, 0x00000000},
-	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // see driver notes
-	// pink labeled color proms
+	// ROM_REGION( 0x2100, "proms", ROMREGION_ERASEFF ) // See driver notes
+	// Pink labeled color proms
 	{"chs1-b-6e_pink.6e",  0x0200, 0x0ad4d727},
 	{"chs1-b-6f_pink.6f",  0x0200, 0x86f5cfdb},
 	{"chs1-b-7f_pink.7f",  0x0200, 0x8bd406f8},
 	{"chs1-b-7e_pink.7e",  0x0200, 0x4c7e3a67},
 	{"chs1-b-8e_pink.8e",  0x0200, 0xec659313},
 	{"chs1-b-8f_pink.8f",  0x0200, 0x8b493c09},
-	// white labeled color proms (indices are reversed)
+	// White labeled color proms (indices are reversed)
 	//{"chs1-b-6e_white.6e", 0x0200, 0x8efd867f},
 	//{"chs1-b-6f_white.6f", 0x0200, 0x279d6cbc},
 	//{"chs1-b-7f_white.7f", 0x0200, 0xcad6b7ad},
@@ -479,18 +479,18 @@ static const ArcadeRom spnchoutjRoms[40] = {
 	//{"chs1-b-8e_white.8e", 0x0200, 0x3a2e333b},
 	//{"chs1-b-8f_white.8f", 0x0200, 0x1663eed7},
 	{"chs1-v.2d",          0x0100, 0x71dc0d48},
-	// ROM_REGION( 0x4000, "vlm", 0 )  /* 16k for the VLM5030 data */
+	// ROM_REGION( 0x4000, "vlm", 0 )  // 16k for the VLM5030 data
 	{"chs1c6pa.bin", 0x4000, 0xd05fb730},
 };
 
 static const ArcadeRom armwrestRoms[35] = {
-	// ROM_REGION( 0x10000, "maincpu", 0 )     /* 64k for code */
+	// ROM_REGION( 0x10000, "maincpu", 0 )     // 64k for code
 	{"chv1-c.8l",    0x2000, 0xb09764c1},
 	{"chv1-c.8k",    0x2000, 0x0e147ff7},
 	{"chv1-c.8j",    0x2000, 0xe7365289},
 	{"chv1-c.8h",    0x2000, 0xa2118eec},
 	{"chpv-c.8f",    0x4000, 0x664a07c4},
-	// ROM_REGION( 0x10000, "audiocpu", 0 )    /* 64k for the sound CPU */
+	// ROM_REGION( 0x10000, "audiocpu", 0 )    // 64k for the sound CPU
 	{"chp1-c.4k",    0x2000, 0xcb6ef376},
 	// ROM_REGION( 0x08000, "gfx1", ROMREGION_ERASEFF )
 	{"chpv-b.2e",    0x4000, 0x8b45f365},
@@ -528,17 +528,17 @@ static const ArcadeRom armwrestRoms[35] = {
 	{"chpv-b.4d",    0x0200, 0x474fc3b1},
 //	{"chv1-b.3c",    0x0100, 0xc3f92ea2},
 	{"chpv-v.2d",    0x0100, 0x71dc0d48},
-	// ROM_REGION( 0x4000, "vlm", 0 )  /* 16k for the VLM5030 data */
+	// ROM_REGION( 0x4000, "vlm", 0 )  // 16k for the VLM5030 data
 	{"chv1-c.6p",    0x4000, 0x31b52896},
 };
 
-const ArcadeGame games[GAME_COUNT] = {
-	{"punchout",  "Punch-Out!! (Rev B)", 42, punchoutRoms},
-	{"punchouta", "Punch-Out!! (Rev A)", 42, punchoutaRoms},
-	{"punchoutj", "Punch-Out!! (Japan)", 42, punchoutjRoms},
-	{"punchita",  "Punch-Out!! (Italian bootleg)", 42, punchitaRoms},
-	{"spnchout",  "Super Punch-Out!! (Rev B)", 40, spnchoutRoms},
-	{"spnchouta", "Super Punch-Out!! (Rev A)", 40, spnchoutaRoms},
-	{"spnchoutj", "Super Punch-Out!! (Japan)", 40, spnchoutjRoms},
-	{"armwrest",  "Arm Wrestling", 35, armwrestRoms},
+const ArcadeGame punchoutGames[GAME_COUNT] = {
+	AC_GAME("punchout",  "Punch-Out!! (Rev B)", punchoutRoms)
+	AC_GAME("punchouta", "Punch-Out!! (Rev A)", punchoutaRoms)
+	AC_GAME("punchoutj", "Punch-Out!! (Japan)", punchoutjRoms)
+	AC_GAME("punchita",  "Punch-Out!! (Italian bootleg)", punchitaRoms)
+	AC_GAME("spnchout",  "Super Punch-Out!! (Rev B)", spnchoutRoms)
+	AC_GAME("spnchouta", "Super Punch-Out!! (Rev A)", spnchoutaRoms)
+	AC_GAME("spnchoutj", "Super Punch-Out!! (Japan)", spnchoutjRoms)
+	AC_GAME("armwrest",  "Arm Wrestling", armwrestRoms)
 };

@@ -6,8 +6,8 @@
 #include "ARM6502/M6502.i"
 #include "PUVideo.i"
 
-	.global cpuReset
 	.global run
+	.global cpuReset
 	.global frameTotal
 	.global waitMaskIn
 	.global waitMaskOut
@@ -61,8 +61,7 @@ puFrameLoop:
 ;@--------------------------------------
 	ldr z80optbl,=Z80OpTable
 	ldr r0,z80CyclesPerScanline
-	b Z80RestoreAndRunXCycles
-puZ80End:
+	bl Z80RestoreAndRunXCycles
 	add r0,z80optbl,#z80Regs
 	stmia r0,{z80f-z80pc,z80sp}				;@ Save Z80 state
 ;@--------------------------------------
@@ -122,11 +121,8 @@ cpuReset:		;@ Called by loadCart/resetGame
 	adr r4,cpuMapData
 	bl mapZ80Memory
 
-	adr r0,puZ80End
-	str r0,[z80optbl,#z80NextTimeout]
-	str r0,[z80optbl,#z80NextTimeout_]
-
-	mov r0,#0
+	mov r0,z80optbl
+	mov r1,#0
 	bl Z80Reset
 
 
