@@ -9,12 +9,13 @@
 #include "Cart.h"
 #include "Gfx.h"
 #include "io.h"
+#include "cpu.h"
 #include "ARMZ80/Version.h"
 #include "ARM6502/Version.h"
 #include "N2A03/Version.h"
 #include "VLM5030/Version.h"
 
-#define EMUVERSION "V0.4.1 2022-10-02"
+#define EMUVERSION "V0.4.1 2022-10-04"
 
 static void uiDebug(void);
 
@@ -27,7 +28,7 @@ const fptr fnList3[] = {uiDummy};
 const fptr fnList4[] = {autoBSet, autoASet, controllerSet, swapABSet};
 const fptr fnList5[] = {scalingSet, flickSet, gammaSet};
 const fptr fnList6[] = {speedSet, autoStateSet, autoSettingsSet, autoNVRAMSet, autoPauseGameSet, powerSaveSet, screenSwapSet, sleepSet};
-const fptr fnList7[] = {debugTextSet, bgrLayerSet, sprLayerSet};
+const fptr fnList7[] = {debugTextSet, bgrLayerSet, sprLayerSet, stepFrame};
 const fptr fnList8[] = {coinASet, difficultSet, timeSet, demoSet, discountSet, serviceSet, copyrightSet};
 const fptr fnList9[] = {quickSelectGame, quickSelectGame, quickSelectGame, quickSelectGame, quickSelectGame, quickSelectGame, quickSelectGame, quickSelectGame};
 const fptr fnList10[] = {uiDummy};
@@ -67,6 +68,11 @@ void enterGUI() {
 
 /// This is called going from ui to emu.
 void exitGUI() {
+}
+
+void autoLoadGame(void) {
+	ui9();
+	quickSelectGame();
 }
 
 void quickSelectGame(void) {
@@ -117,11 +123,11 @@ void uiAbout() {
 	drawMenuText("A:         Super punch", 10, 0);
 	drawMenuText("B:         Duck (Joystick up)", 11, 0);
 
-	drawMenuText("PunchOutDS " EMUVERSION, 19, 0);
-	drawMenuText("ARMZ80     " ARMZ80VERSION, 20, 0);
-	drawMenuText("ARM6502    " ARM6502VERSION, 21, 0);
-	drawMenuText("N2A03      " N2A03VERSION, 22, 0);
-	drawMenuText("VLM5030    " VLM5030VERSION, 23, 0);
+	drawMenuText("PunchOutDS   " EMUVERSION, 19, 0);
+	drawMenuText("ARMZ80       " ARMZ80VERSION, 20, 0);
+	drawMenuText("ARM6502      " ARM6502VERSION, 21, 0);
+	drawMenuText("N2A03        " N2A03VERSION, 22, 0);
+	drawMenuText("VLM5030      " VLM5030VERSION, 23, 0);
 }
 
 void uiController() {

@@ -71,7 +71,7 @@ int main(int argc, char **argv) {
 	loadCart(0,0);
 	if ( initFileHelper() ) {
 		loadSettings();
-		quickSelectGame();
+		autoLoadGame();
 	} else {
 		drawText("fatInitDefault() failure.",23,0);
 	}

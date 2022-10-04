@@ -7,6 +7,7 @@
 #include "PUVideo.i"
 
 	.global run
+	.global stepFrame
 	.global cpuReset
 	.global frameTotal
 	.global waitMaskIn
@@ -21,7 +22,7 @@
 	.section .text
 	.align 2
 ;@----------------------------------------------------------------------------
-run:		;@ Return after 1 frame
+run:						;@ Return after X frame(s)
 	.type   run STT_FUNC
 ;@----------------------------------------------------------------------------
 	ldrh r0,waitCountIn
@@ -106,6 +107,38 @@ waitCountIn:		.byte 0
 waitMaskIn:			.byte 0
 waitCountOut:		.byte 0
 waitMaskOut:		.byte 0
+
+;@----------------------------------------------------------------------------
+stepFrame:					;@ Return after 1 frame
+	.type   stepFrame STT_FUNC
+;@----------------------------------------------------------------------------
+	stmfd sp!,{r4-r11,lr}
+;@----------------------------------------------------------------------------
+puStepLoop:
+;@----------------------------------------------------------------------------
+	ldr m6502optbl,=m6502OpTable
+	ldr r0,m6502CyclesPerScanline
+	bl m6502RestoreAndRunXCycles
+	add r0,m6502optbl,#m6502Regs
+	stmia r0,{m6502nz-m6502pc,m6502zpage}	;@ Save M6502 state
+;@--------------------------------------
+	ldr z80optbl,=Z80OpTable
+	ldr r0,z80CyclesPerScanline
+	bl Z80RestoreAndRunXCycles
+	add r0,z80optbl,#z80Regs
+	stmia r0,{z80f-z80pc,z80sp}				;@ Save Z80 state
+;@--------------------------------------
+	ldr puptr,=puVideo_0
+	bl doScanline
+	cmp r0,#0
+	beq puStepLoop
+;@----------------------------------------------------------------------------
+	ldr r1,frameTotal
+	add r1,r1,#1
+	str r1,frameTotal
+
+	ldmfd sp!,{r4-r11,lr}
+	bx lr
 
 ;@----------------------------------------------------------------------------
 cpuReset:		;@ Called by loadCart/resetGame
