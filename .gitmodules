@@ -1,8 +1,8 @@
 [submodule "source/ARMZ80"]
 	path = source/ARMZ80
 	url = https://github.com/FluBBaOfWard/ARMZ80.git
-[submodule "source/N2A03"]
-	path = source/N2A03
+[submodule "source/RP2A03"]
+	path = source/RP2A03
 	url = https://github.com/FluBBaOfWard/N2A03.git
 [submodule "source/VLM5030"]
 	path = source/VLM5030

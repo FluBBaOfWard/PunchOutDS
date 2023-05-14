@@ -197,7 +197,7 @@
 			path = Unzip;
 			sourceTree = "<group>";
 		};
-		A47FEA7A20F4E31900D47785 /* N2A03 */ = {
+		A47FEA7A20F4E31900D47785 /* RP2A03 */ = {
 			isa = PBXGroup;
 			children = (
 				9C3A89F82A115A1A007609DE /* ARM6502 */,
@@ -209,14 +209,14 @@
 				A47FEA7D20F4E31900D47785 /* RP2A03.i */,
 				A47FEA7C20F4E31900D47785 /* RP2A03.s */,
 			);
-			path = N2A03;
+			path = RP2A03;
 			sourceTree = "<group>";
 		};
 		A48CC0251618E65200465E20 /* source */ = {
 			isa = PBXGroup;
 			children = (
 				A49D34311757E54900BD9B4B /* ARMZ80 */,
-				A47FEA7A20F4E31900D47785 /* N2A03 */,
+				A47FEA7A20F4E31900D47785 /* RP2A03 */,
 				A47AFF1820DFAC200081DB4E /* VLM5030 */,
 				A47F092720863384004E1DA6 /* Shared */,
 				9C50823025D48F2A00A8E1BA /* Main.h */,
