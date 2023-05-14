@@ -2,8 +2,10 @@ PunchOutDS revision history
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
-V0.4.1 - 2022-10-04 (FluBBa)
-	Cleaned up source.
+V0.4.1 - 2023-05-14 (FluBBa)
+	Added new debug menu.
+	Better menu traversing.
+	Moved ARM6502 to be a submodule of RP2A03.
 
 V0.4.0 - 2021-03-28 (FluBBa)
 	Added rom loading of all games.

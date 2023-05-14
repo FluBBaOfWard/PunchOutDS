@@ -6,9 +6,9 @@
 #include "Sound.h"
 #include "PUVideo.h"
 #include "RP5C01.h"
-#include "N2A03/N2A03.h"
+#include "N2A03/RP2A03.h"
 #include "ARMZ80/ARMZ80.h"
-#include "ARM6502/M6502.h"
+#include "cpu.h"
 
 
 int packState(void *statePtr) {
@@ -16,9 +16,9 @@ int packState(void *statePtr) {
 	memcpy(statePtr+size, cpu2Ram, sizeof(cpu2Ram));
 	size += sizeof(cpu2Ram);
 	size += rp5c01SaveState(statePtr+size);
-	size += n2A03SaveState(statePtr+size, &n2A03_0);
+	size += rp2A03SaveState(statePtr+size, &rp2A03_0);
 	size += puVideoSaveState(statePtr+size, &puVideo_0);
-	size += m6502SaveState(statePtr+size, &m6502OpTable);
+	size += m6502SaveState(statePtr+size, &m6502Base);
 	size += Z80SaveState(statePtr+size, &Z80OpTable);
 	return size;
 }
@@ -28,9 +28,9 @@ void unpackState(const void *statePtr) {
 	memcpy(cpu2Ram, statePtr+size, sizeof(cpu2Ram));
 	size += sizeof(cpu2Ram);
 	size += rp5c01LoadState(statePtr+size);
-	size += n2A03LoadState(&n2A03_0, statePtr+size);
+	size += rp2A03LoadState(&rp2A03_0, statePtr+size);
 	size += puVideoLoadState(&puVideo_0, statePtr+size);
-	size += m6502LoadState(&m6502OpTable, statePtr+size);
+	size += m6502LoadState(&m6502Base, statePtr+size);
 	Z80LoadState(&Z80OpTable, statePtr+size);
 }
 
@@ -38,7 +38,7 @@ int getStateSize() {
 	int size = 0;
 	size += sizeof(cpu2Ram);
 	size += rp5c01GetStateSize();
-	size += n2A03GetStateSize();
+	size += rp2A03GetStateSize();
 	size += puVideoGetStateSize();
 	size += m6502GetStateSize();
 	size += Z80GetStateSize();

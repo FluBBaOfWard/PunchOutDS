@@ -3,23 +3,28 @@
 
 #include "Shared/nds_asm.h"
 #include "ARMZ80/ARMZ80.i"
-#include "ARM6502/M6502.i"
+#include "N2A03/RP2A03.i"
 #include "PUVideo.i"
 
 	.global run
 	.global stepFrame
+	.global cpuInit
 	.global cpuReset
 	.global frameTotal
 	.global waitMaskIn
 	.global waitMaskOut
 	.global cpu01SetIRQ
-
+	.global m6502Base
 
 
 	.syntax unified
 	.arm
 
-	.section .text
+#ifdef GBA
+	.section .ewram, "ax", %progbits	;@ For the GBA
+#else
+	.section .text						;@ For anything else
+#endif
 	.align 2
 ;@----------------------------------------------------------------------------
 run:						;@ Return after X frame(s)
@@ -54,16 +59,16 @@ runStart:
 ;@----------------------------------------------------------------------------
 puFrameLoop:
 ;@----------------------------------------------------------------------------
-	ldr m6502optbl,=m6502OpTable
+	ldr m6502ptr,=m6502Base
 	ldr r0,m6502CyclesPerScanline
 	bl m6502RestoreAndRunXCycles
-	add r0,m6502optbl,#m6502Regs
+	add r0,m6502ptr,#m6502Regs
 	stmia r0,{m6502nz-m6502pc,m6502zpage}	;@ Save M6502 state
 ;@--------------------------------------
-	ldr z80optbl,=Z80OpTable
+	ldr z80ptr,=Z80OpTable
 	ldr r0,z80CyclesPerScanline
 	bl Z80RestoreAndRunXCycles
-	add r0,z80optbl,#z80Regs
+	add r0,z80ptr,#z80Regs
 	stmia r0,{z80f-z80pc,z80sp}				;@ Save Z80 state
 ;@--------------------------------------
 	ldr puptr,=puVideo_0
@@ -92,13 +97,13 @@ puFrameLoop:
 ;@----------------------------------------------------------------------------
 cpu01SetIRQ:
 ;@----------------------------------------------------------------------------
-	stmfd sp!,{r0,z80optbl,lr}
-	ldr z80optbl,=Z80OpTable
+	stmfd sp!,{r0,z80ptr,lr}
+	ldr z80ptr,=Z80OpTable
 	bl Z80SetNMIPin
 	ldmfd sp!,{r0}
-	ldr m6502optbl,=m6502OpTable
+	ldr m6502ptr,=m6502Base
 	bl m6502SetNMIPin
-	ldmfd sp!,{z80optbl,pc}
+	ldmfd sp!,{z80ptr,pc}
 ;@----------------------------------------------------------------------------
 z80CyclesPerScanline:	.long 0
 m6502CyclesPerScanline:	.long 0
@@ -116,16 +121,16 @@ stepFrame:					;@ Return after 1 frame
 ;@----------------------------------------------------------------------------
 puStepLoop:
 ;@----------------------------------------------------------------------------
-	ldr m6502optbl,=m6502OpTable
+	ldr m6502ptr,=m6502Base
 	ldr r0,m6502CyclesPerScanline
 	bl m6502RestoreAndRunXCycles
-	add r0,m6502optbl,#m6502Regs
+	add r0,m6502ptr,#m6502Regs
 	stmia r0,{m6502nz-m6502pc,m6502zpage}	;@ Save M6502 state
 ;@--------------------------------------
-	ldr z80optbl,=Z80OpTable
+	ldr z80ptr,=Z80OpTable
 	ldr r0,z80CyclesPerScanline
 	bl Z80RestoreAndRunXCycles
-	add r0,z80optbl,#z80Regs
+	add r0,z80ptr,#z80Regs
 	stmia r0,{z80f-z80pc,z80sp}				;@ Save Z80 state
 ;@--------------------------------------
 	ldr puptr,=puVideo_0
@@ -141,6 +146,10 @@ puStepLoop:
 	bx lr
 
 ;@----------------------------------------------------------------------------
+cpuInit:
+	ldr r0,=m6502Base
+	b m6502Init
+;@----------------------------------------------------------------------------
 cpuReset:		;@ Called by loadCart/resetGame
 ;@----------------------------------------------------------------------------
 	stmfd sp!,{lr}
@@ -149,12 +158,12 @@ cpuReset:		;@ Called by loadCart/resetGame
 	ldr r0,=253
 	str r0,z80CyclesPerScanline
 ;@--------------------------------------
-	ldr z80optbl,=Z80OpTable
+	ldr z80ptr,=Z80OpTable
 
 	adr r4,cpuMapData
 	bl mapZ80Memory
 
-	mov r0,z80optbl
+	mov r0,z80ptr
 	mov r1,#0
 	bl Z80Reset
 
@@ -163,12 +172,12 @@ cpuReset:		;@ Called by loadCart/resetGame
 	ldr r0,=113
 	str r0,m6502CyclesPerScanline
 ;@--------------------------------------
-	ldr m6502optbl,=m6502OpTable
+	ldr m6502ptr,=m6502Base
 
 	adr r4,cpuMapData+8
 	bl mapM6502Memory
 
-	mov r0,m6502optbl
+	mov r0,m6502ptr
 	bl m6502Reset
 
 	ldmfd sp!,{lr}
@@ -208,6 +217,17 @@ m6502DataLoop:
 	movs r5,r5,lsr#1
 	bne m6502DataLoop
 	ldmfd sp!,{pc}
+;@----------------------------------------------------------------------------
+#ifdef NDS
+	.section .dtcm, "ax", %progbits			;@ For the NDS
+#elif GBA
+	.section .iwram, "ax", %progbits		;@ For the GBA
+#else
+	.section .text
+#endif
+;@----------------------------------------------------------------------------
+m6502Base:
+	.space m6502Size
 ;@----------------------------------------------------------------------------
 	.end
 #endif // #ifdef __arm__

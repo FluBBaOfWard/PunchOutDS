@@ -11,11 +11,11 @@
 #include "io.h"
 #include "cpu.h"
 #include "ARMZ80/Version.h"
-#include "ARM6502/Version.h"
+#include "N2A03/ARM6502/Version.h"
 #include "N2A03/Version.h"
 #include "VLM5030/Version.h"
 
-#define EMUVERSION "V0.4.1 2022-10-04"
+#define EMUVERSION "V0.4.1 2023-05-14"
 
 static void uiDebug(void);
 
@@ -126,7 +126,7 @@ void uiAbout() {
 	drawMenuText("PunchOutDS   " EMUVERSION, 19, 0);
 	drawMenuText("ARMZ80       " ARMZ80VERSION, 20, 0);
 	drawMenuText("ARM6502      " ARM6502VERSION, 21, 0);
-	drawMenuText("N2A03        " N2A03VERSION, 22, 0);
+	drawMenuText("RP2A03       " RP2A03VERSION, 22, 0);
 	drawMenuText("VLM5030      " VLM5030VERSION, 23, 0);
 }
 

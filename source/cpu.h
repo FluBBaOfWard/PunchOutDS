@@ -5,6 +5,9 @@
 extern "C" {
 #endif
 
+#include "N2A03/RP2A03.h"
+
+extern M6502Core m6502Base;
 extern u8 waitMaskIn;
 extern u8 waitMaskOut;
 

@@ -1,9 +1,6 @@
 [submodule "source/ARMZ80"]
 	path = source/ARMZ80
 	url = https://github.com/FluBBaOfWard/ARMZ80.git
-[submodule "source/ARM6502"]
-	path = source/ARM6502
-	url = https://github.com/FluBBaOfWard/ARM6502.git
 [submodule "source/N2A03"]
 	path = source/N2A03
 	url = https://github.com/FluBBaOfWard/N2A03.git

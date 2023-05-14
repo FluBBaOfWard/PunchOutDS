@@ -3,7 +3,7 @@
 
 #include "Shared/EmuSettings.h"
 #include "ARMZ80/ARMZ80mac.h"
-#include "ARM6502/M6502.i"
+#include "N2A03/RP2A03.i"
 #include "PUVideo.i"
 
 	.global machineInit
@@ -323,7 +323,7 @@ machineInit: 	;@ Called from C
 	bl gfxInit
 //	bl ioInit
 	bl soundInit
-//	bl cpuInit
+	bl cpuInit
 
 	ldmfd sp!,{lr}
 	bx lr
@@ -378,7 +378,7 @@ tbloop1:
 	cmp r0,#0x06
 	bne tbloop1
 
-	ldr r7,=mem6502R0			;@ N2A03 ROM
+	ldr r7,=mem6502R0			;@ RP2A03 ROM
 	add r1,r3,r0,lsl#13
 	str r1,[r4,r0,lsl#2]		;@ MemMap
 	str r7,[r5,r0,lsl#2]		;@ RdMem
@@ -395,9 +395,9 @@ tbloop2:
 	cmp r0,#0x100
 	bne tbloop2
 
-	ldr r7,=n2A03_0R
-	ldr r8,=n2A03_0W
-	mov r0,#0xFC				;@ N2A03 IO
+	ldr r7,=rp2A03_0R
+	ldr r8,=rp2A03_0W
+	mov r0,#0xFC				;@ RP2A03 IO
 	str r1,[r4,r0,lsl#2]		;@ MemMap
 	str r7,[r5,r0,lsl#2]		;@ RdMem
 	str r8,[r6,r0,lsl#2]		;@ WrMem
@@ -460,9 +460,9 @@ z80Mapper:		;@ Rom paging..
 	cmp r1,#0x88
 	movmi r5,#12
 
-	add r6,z80optbl,#z80ReadTbl
-	add r7,z80optbl,#z80WriteTbl
-	add r8,z80optbl,#z80MemTbl
+	add r6,z80ptr,#z80ReadTbl
+	add r7,z80ptr,#z80WriteTbl
+	add r8,z80ptr,#z80MemTbl
 	b z80MemAps
 z80MemApl:
 	add r6,r6,#4
@@ -501,9 +501,9 @@ m6502Mapper:		;@ Rom paging..
 	cmp r1,#0x88
 	movmi r5,#12
 
-	add r6,m6502optbl,#m6502ReadTbl
-	add r7,m6502optbl,#m6502WriteTbl
-	add r8,m6502optbl,#m6502MemTbl
+	add r6,m6502ptr,#m6502ReadTbl
+	add r7,m6502ptr,#m6502WriteTbl
+	add r8,m6502ptr,#m6502MemTbl
 	b m6502MemAps
 m6502MemApl:
 	add r6,r6,#4

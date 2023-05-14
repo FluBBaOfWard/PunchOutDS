@@ -1,14 +1,14 @@
 
 #ifdef __arm__
 
-#include "N2A03/N2A03.i"
+#include "N2A03/RP2A03.i"
 
 	.global soundInit
 	.global soundReset
 	.global VblSound2
-	.global n2A03_0R
-	.global n2A03_0W
-	.global n2A03_0
+	.global rp2A03_0R
+	.global rp2A03_0W
+	.global rp2A03_0
 	.global setMuteSoundGUI
 	.global setMuteSoundGame
 
@@ -28,8 +28,8 @@ soundInit:
 ;@----------------------------------------------------------------------------
 	stmfd sp!,{lr}
 
-	ldr n2a03ptr,=n2A03_0
-//	bl n2A03Init				;@ sound
+	ldr rp2a03ptr,=rp2A03_0
+//	bl rp2A03Init				;@ sound
 
 	ldmfd sp!,{lr}
 //	bx lr
@@ -39,9 +39,9 @@ soundReset:
 ;@----------------------------------------------------------------------------
 	stmfd sp!,{lr}
 
-	ldr n2a03ptr,=n2A03_0
+	ldr rp2a03ptr,=rp2A03_0
 	ldr r0,=m6502SetIRQPin
-	bl n2A03Reset				;@ sound
+	bl rp2A03Reset				;@ sound
 
 	ldmfd sp!,{lr}
 	bx lr
@@ -68,8 +68,8 @@ VblSound2:					;@ r0=length, r1=pointer, r2=formats?
 	cmp r2,#0
 	bne silenceMix
 
-	ldr n2a03ptr,=n2A03_0
-	bl n2A03Mixer
+	ldr rp2a03ptr,=rp2A03_0
+	bl rp2A03Mixer
 
 	ldmfd sp,{r0}
 	ldr r1,pcmPtr0
@@ -157,21 +157,21 @@ silenceLoop:
 	bx lr
 
 ;@----------------------------------------------------------------------------
-n2A03_0R:
+rp2A03_0R:
 ;@----------------------------------------------------------------------------
 	stmfd sp!,{r3,lr}
 	mov r1,r12
-	ldr n2a03ptr,=n2A03_0
-	bl n2A03Read
+	ldr rp2a03ptr,=rp2A03_0
+	bl rp2A03Read
 	ldmfd sp!,{r3,lr}
 	bx lr
 ;@----------------------------------------------------------------------------
-n2A03_0W:
+rp2A03_0W:
 ;@----------------------------------------------------------------------------
 	stmfd sp!,{r3,lr}
 	mov r1,r12
-	ldr n2a03ptr,=n2A03_0
-	bl n2A03Write
+	ldr rp2a03ptr,=rp2A03_0
+	bl rp2A03Write
 	ldmfd sp!,{r3,lr}
 	bx lr
 
@@ -187,8 +187,8 @@ muteSoundGame:
 	.space 2
 
 	.section .bss
-n2A03_0:
-	.space n2a03Size
+rp2A03_0:
+	.space rp2a03Size
 freqTbl:
 	.space 1024*2
 wavBuffer:

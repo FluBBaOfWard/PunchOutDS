@@ -25,7 +25,7 @@ SOURCES		:=	source	\
 				source/Shared \
 				source/Shared/Unzip \
 				source/ARMZ80 \
-				source/ARM6502 \
+				source/N2A03/ARM6502 \
 				source/N2A03 \
 				source/VLM5030
 DATA		:=	data  
@@ -37,7 +37,7 @@ GRAPHICS	:=	graphics \
 # options for code generation
 #---------------------------------------------------------------------------------
 ARCH	:=	-march=armv5te -mtune=arm946e-s -mthumb -mthumb-interwork
-FLAGS	:=	-DARM9 -DNDS -DZ80_USE_FAST_MEM -DCPU_N2A03 -DNO_FASTMEM_6502
+FLAGS	:=	-DARM9 -DNDS -DZ80_USE_FAST_MEM -DCPU_RP2A03 -DNO_FASTMEM_6502
 
 CFLAGS	:=	-g -Wall -O2 \
 			-fomit-frame-pointer \
