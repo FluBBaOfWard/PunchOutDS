@@ -25,8 +25,8 @@ SOURCES		:=	source	\
 				source/Shared \
 				source/Shared/Unzip \
 				source/ARMZ80 \
-				source/N2A03/ARM6502 \
-				source/N2A03 \
+				source/RP2A03/ARM6502 \
+				source/RP2A03 \
 				source/VLM5030
 DATA		:=	data  
 INCLUDES	:=	include

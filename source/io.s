@@ -3,7 +3,7 @@
 
 #include "ARMZ80/ARMZ80mac.h"
 #include "PUVideo.i"
-#include "N2A03/RP2A03.i"
+#include "RP2A03/RP2A03.i"
 
 	.global ioReset
 	.global Z80In
@@ -92,20 +92,20 @@ EMUinput:			;@ This label here for main.c to use
 	.long 0			;@ EMUjoypad (this is what Emu sees)
 
 ;@----------------------------------------------------------------------------
-Input0_R:		;@ Player 1
+Input0_R:					;@ Player 1
 ;@----------------------------------------------------------------------------
 ;@	mov r11,r11					;@ No$GBA breakpoint
 	ldrb r0,joy0State
 //	eor r0,r0,#0xFF
 	bx lr
 ;@----------------------------------------------------------------------------
-Input1_R:		;@ Player 2
+Input1_R:					;@ Player 2
 ;@----------------------------------------------------------------------------
 	ldrb r0,joy1State
 //	eor r0,r0,#0xFF
 	bx lr
 ;@----------------------------------------------------------------------------
-Input2_R:		;@ Coins, Start & Service
+Input2_R:					;@ Coins, Start & Service
 ;@----------------------------------------------------------------------------
 	ldrb r0,joy2State
 //	eor r0,r0,#0xFF
@@ -139,10 +139,9 @@ Input5_R:
 	bx lr
 
 ;@----------------------------------------------------------------------------
-Z80In:				;@ I/O read  (0x00-0x0F)
+Z80In:						;@ I/O read  (0x00-0x0F)
 ;@----------------------------------------------------------------------------
-	and r1,addy,#0x0F
-	cmp r1,#0x00
+	ands r1,addy,#0x0F
 	beq Input0_R
 	cmp r1,#0x01
 	beq Input1_R
@@ -156,60 +155,59 @@ Z80In:				;@ I/O read  (0x00-0x0F)
 	b empty_IO_R
 
 ;@----------------------------------------------------------------------------
-Z80Out:				;@I/O write  (0x00-0x0F)
+Z80Out:						;@I/O write  (0x00-0x0F)
 ;@----------------------------------------------------------------------------
-	ands r1,addy,#0x0F
-	beq soundLatch00W
-	cmp r1,#0x01
-	beq soundLatch01W
-	cmp r1,#0x02
-	beq soundLatch10W
-	cmp r1,#0x03
-	beq soundLatch11W
-	cmp r1,#0x04
-	beq vlmData						/* VLM5030 */
-	cmp r1,#0x07
-	beq protectionWrite
-	cmp r1,#0x08
-	ldreq puptr,=puVideo_0
-	beq nmiMaskWrite
-	cmp r1,#0x0A
-	beq punchoutLampsW
-	cmp r1,#0x0B
-	beq punchout_2a03_reset_w
-	cmp r1,#0x0C
-	beq punchoutSpeechResetW		/* VLM5030 */
-	cmp r1,#0x0D
-	beq punchoutSpeechStW			/* VLM5030 */
-	cmp r1,#0x0E
-	beq punchoutSpeechVcuW			/* VLM5030 */
-	cmp r1,#0x0F
-	beq enableNVRAM
-	b empty_IO_W
+	and r1,addy,#0x0F
+	ldr pc,[pc,r1,lsl#2]
+	nop
+;@----------------------------------------------------------------------------
+z80OutTbl:
+	.long soundLatch00W
+	.long soundLatch01W
+	.long soundLatch10W
+	.long soundLatch11W
+	.long vlmData				;@ VLM5030
+	.long empty_IO_W
+	.long empty_IO_W
+	.long protectionWrite
+	.long ppuNmiMaskW
+	.long empty_IO_W
+	.long punchoutLampsW
+	.long punchout2A03ResetW
+	.long punchoutSpeechResetW	;@ VLM5030
+	.long punchoutSpeechStW		;@ VLM5030
+	.long punchoutSpeechVcuW	;@ VLM5030
+	.long enableNVRAM
 
+
+;@----------------------------------------------------------------------------
+ppuNmiMaskW:
+;@----------------------------------------------------------------------------
+	ldr puptr,=puVideo_0
+	b nmiMaskWrite
 ;@----------------------------------------------------------------------------
 soundLatch00W:
 soundLatch01W:
 punchoutLampsW:
-punchout_2a03_reset_w:
+punchout2A03ResetW:
 enableNVRAM:
 ;@----------------------------------------------------------------------------
 	bx lr
 ;@----------------------------------------------------------------------------
 soundLatch10W:
 ;@----------------------------------------------------------------------------
-	ldr r1,=rp2A03_0
+	ldr r1,=rp2A03_0+rp2A03BaseAdr
 	strb r0,[r1,#input0]
 	bx lr
 ;@----------------------------------------------------------------------------
 soundLatch11W:
 ;@----------------------------------------------------------------------------
-	ldr r1,=rp2A03_0
+	ldr r1,=rp2A03_0+rp2A03BaseAdr
 	strb r0,[r1,#input1]
 	bx lr
 
 ;@----------------------------------------------------------------------------
-vlmData:						/* VLM5030 */
+vlmData:					;@ VLM5030
 ;@----------------------------------------------------------------------------
 	mov r1,r0
 	ldr r0,=vlm5030Chip
@@ -218,7 +216,7 @@ vlmData:						/* VLM5030 */
 	blx VLM5030_WRITE8
 	ldmfd sp!,{r3,pc}
 ;@----------------------------------------------------------------------------
-punchoutSpeechResetW:		/* VLM5030 */
+punchoutSpeechResetW:		;@ VLM5030
 ;@----------------------------------------------------------------------------
 	and r1,r0,#1
 	ldr r0,=vlm5030Chip
@@ -227,7 +225,7 @@ punchoutSpeechResetW:		/* VLM5030 */
 	blx VLM5030_RST
 	ldmfd sp!,{r3,pc}
 ;@----------------------------------------------------------------------------
-punchoutSpeechStW:				/* VLM5030 */
+punchoutSpeechStW:			;@ VLM5030
 ;@----------------------------------------------------------------------------
 	and r1,r0,#1
 	ldr r0,=vlm5030Chip
@@ -236,7 +234,7 @@ punchoutSpeechStW:				/* VLM5030 */
 	blx VLM5030_ST
 	ldmfd sp!,{r3,pc}
 ;@----------------------------------------------------------------------------
-punchoutSpeechVcuW:				/* VLM5030 */
+punchoutSpeechVcuW:			;@ VLM5030
 ;@----------------------------------------------------------------------------
 	and r1,r0,#1
 	ldr r0,=vlm5030Chip

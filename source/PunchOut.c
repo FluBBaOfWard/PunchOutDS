@@ -6,7 +6,7 @@
 #include "Sound.h"
 #include "PUVideo.h"
 #include "RP5C01.h"
-#include "N2A03/RP2A03.h"
+#include "RP2A03/RP2A03.h"
 #include "ARMZ80/ARMZ80.h"
 #include "cpu.h"
 
@@ -18,7 +18,6 @@ int packState(void *statePtr) {
 	size += rp5c01SaveState(statePtr+size);
 	size += rp2A03SaveState(statePtr+size, &rp2A03_0);
 	size += puVideoSaveState(statePtr+size, &puVideo_0);
-	size += m6502SaveState(statePtr+size, &m6502Base);
 	size += Z80SaveState(statePtr+size, &Z80OpTable);
 	return size;
 }
@@ -30,7 +29,6 @@ void unpackState(const void *statePtr) {
 	size += rp5c01LoadState(statePtr+size);
 	size += rp2A03LoadState(&rp2A03_0, statePtr+size);
 	size += puVideoLoadState(&puVideo_0, statePtr+size);
-	size += m6502LoadState(&m6502Base, statePtr+size);
 	Z80LoadState(&Z80OpTable, statePtr+size);
 }
 
@@ -40,7 +38,6 @@ int getStateSize() {
 	size += rp5c01GetStateSize();
 	size += rp2A03GetStateSize();
 	size += puVideoGetStateSize();
-	size += m6502GetStateSize();
 	size += Z80GetStateSize();
 	return size;
 }

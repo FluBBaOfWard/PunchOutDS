@@ -3,13 +3,13 @@
 
 #include "Shared/EmuSettings.h"
 #include "ARMZ80/ARMZ80mac.h"
-#include "N2A03/RP2A03.i"
+#include "RP2A03/RP2A03.i"
 #include "PUVideo.i"
 
 	.global machineInit
 	.global loadCart
 	.global z80Mapper
-	.global m6502Mapper
+	.global SetupM6502Mapping
 	.global romNum
 	.global emuFlags
 //	.global scaling
@@ -314,12 +314,32 @@ rawRom:
 // VLM data
 	.incbin "armwrest/chv1-c.6p"
 */
+	.section .ewram,"ax"
 	.align 2
 ;@----------------------------------------------------------------------------
 machineInit: 	;@ Called from C
 	.type   machineInit STT_FUNC
 ;@----------------------------------------------------------------------------
 	stmfd sp!,{lr}
+//	ldr r0,=rawRom
+	ldr r0,=ROM_Space
+
+	str r0,romStart				;@ Set rom base
+	add r0,r0,#0xC000			;@ 0xC000
+	str r0,cpu2Base				;@ Sound cpu rom
+	add r0,r0,#0x2000			;@ 0x2000
+	str r0,vromBase0			;@ Top tile map
+	add r0,r0,#0x8000
+	str r0,vromBase1			;@ Bottom tile map
+	add r0,r0,#0xC000
+	str r0,vromBase2			;@ Big sprite 1
+	add r0,r0,#0x30000
+	str r0,vromBase3			;@ Big sprite 2
+	add r0,r0,#0x8000
+	str r0,promBase				;@ Colour prom
+	add r0,r0,#0xD00
+	str r0,vlmBase				;@ VLM data
+
 	bl gfxInit
 //	bl ioInit
 	bl soundInit
@@ -328,7 +348,7 @@ machineInit: 	;@ Called from C
 	ldmfd sp!,{lr}
 	bx lr
 
-	.section .ewram,"ax"
+//	.section .ewram,"ax"
 	.align 2
 ;@----------------------------------------------------------------------------
 loadCart: 		;@ Called from C:  r0=rom number, r1=emuFlags
@@ -343,25 +363,7 @@ loadCart: 		;@ Called from C:  r0=rom number, r1=emuFlags
 	mov r11,r0
 
 //	ldr r3,=rawRom
-	ldr r3,=ROM_Space
-
-
-								;@ r3=romBase til end of loadcart so DON'T FUCK IT UP
-	str r3,romStart				;@ Set rom base
-	add r0,r3,#0xC000			;@ 0xC000
-	str r0,cpu2Base				;@ Sound cpu rom
-	add r0,r0,#0x2000			;@ 0x2000
-	str r0,vromBase0			;@ Top tile map
-	add r0,r0,#0x8000
-	str r0,vromBase1			;@ Bottom tile map
-	add r0,r0,#0xC000
-	str r0,vromBase2			;@ Big sprite 1
-	add r0,r0,#0x30000
-	str r0,vromBase3			;@ Big sprite 2
-	add r0,r0,#0x8000
-	str r0,promBase				;@ Colour prom
-	add r0,r0,#0xD00
-	str r0,vlmBase				;@ VLM data
+	ldr r3,=ROM_Space			;@ r3=romBase til end of loadcart so DON'T FUCK IT UP
 
 	ldr r4,=MEMMAPTBL_
 	ldr r5,=RDMEMTBL_
@@ -378,13 +380,6 @@ tbloop1:
 	cmp r0,#0x06
 	bne tbloop1
 
-	ldr r7,=mem6502R0			;@ RP2A03 ROM
-	add r1,r3,r0,lsl#13
-	str r1,[r4,r0,lsl#2]		;@ MemMap
-	str r7,[r5,r0,lsl#2]		;@ RdMem
-	str r8,[r6,r0,lsl#2]		;@ WrMem
-	add r0,r0,#1
-
 	ldr r7,=empty_R
 	ldr r8,=empty_W
 tbloop2:
@@ -394,21 +389,6 @@ tbloop2:
 	add r0,r0,#1
 	cmp r0,#0x100
 	bne tbloop2
-
-	ldr r7,=rp2A03_0R
-	ldr r8,=rp2A03_0W
-	mov r0,#0xFC				;@ RP2A03 IO
-	str r1,[r4,r0,lsl#2]		;@ MemMap
-	str r7,[r5,r0,lsl#2]		;@ RdMem
-	str r8,[r6,r0,lsl#2]		;@ WrMem
-
-	ldr r1,=cpu2Ram
-	ldr r7,=mem6502R0
-	ldr r8,=ram6502W
-	mov r0,#0xFD				;@ CPU2 RAM
-	str r1,[r4,r0,lsl#2]		;@ MemMap
-	str r7,[r5,r0,lsl#2]		;@ RdMem
-	str r8,[r6,r0,lsl#2]		;@ WrMem
 
 	ldr r1,=EMU_RAM
 	ldr r7,=memZ80R6
@@ -442,9 +422,48 @@ tbloop2:
 	bx lr
 
 ;@----------------------------------------------------------------------------
-//	.section itcm
+SetupM6502Mapping:			;@ Call with m6502ptr initialized
 ;@----------------------------------------------------------------------------
+	mov r0,#0
+	ldr r1,=empty_R
+	ldr r2,=empty_W
 
+	str r0,[m6502ptr,#m6502MemTbl+4]	;@ MemMap
+	str r1,[m6502ptr,#m6502ReadTbl+4]	;@ RdMem
+	str r2,[m6502ptr,#m6502WriteTbl+4]	;@ WrMem
+
+	str r0,[m6502ptr,#m6502MemTbl+12]	;@ MemMap
+	str r1,[m6502ptr,#m6502ReadTbl+12]	;@ RdMem
+	str r2,[m6502ptr,#m6502WriteTbl+12]	;@ WrMem
+
+	str r0,[m6502ptr,#m6502MemTbl+16]	;@ MemMap
+	str r1,[m6502ptr,#m6502ReadTbl+16]	;@ RdMem
+	str r2,[m6502ptr,#m6502WriteTbl+16]	;@ WrMem
+
+	str r0,[m6502ptr,#m6502MemTbl+20]	;@ MemMap
+	str r1,[m6502ptr,#m6502ReadTbl+20]	;@ RdMem
+	str r2,[m6502ptr,#m6502WriteTbl+20]	;@ WrMem
+
+	str r0,[m6502ptr,#m6502MemTbl+24]	;@ MemMap
+	str r1,[m6502ptr,#m6502ReadTbl+24]	;@ RdMem
+	str r2,[m6502ptr,#m6502WriteTbl+24]	;@ WrMem
+
+	ldr r0,=cpu2Ram
+	ldr r1,=mem6502R0
+	ldr r2,=ram6502W
+	str r0,[m6502ptr,#m6502MemTbl]		;@ MemMap
+	str r1,[m6502ptr,#m6502ReadTbl]		;@ RdMem
+	str r2,[m6502ptr,#m6502WriteTbl]	;@ WrMem
+
+	ldr r0,cpu2Base
+	sub r0,r0,#0xE000
+	ldr r1,=mem6502R7
+	ldr r2,=rom_W
+	str r0,[m6502ptr,#m6502MemTbl+28]	;@ MemMap
+	str r1,[m6502ptr,#m6502ReadTbl+28]	;@ RdMem
+	str r2,[m6502ptr,#m6502WriteTbl+28]	;@ WrMem
+
+	bx lr
 ;@----------------------------------------------------------------------------
 z80Mapper:		;@ Rom paging..
 ;@----------------------------------------------------------------------------
@@ -486,46 +505,6 @@ z80Flush:		;@ Update cpu_pc & lastbank
 
 	ldmfd sp!,{r3-r8,lr}
 	bx lr
-;@----------------------------------------------------------------------------
-m6502Mapper:		;@ Rom paging..
-;@----------------------------------------------------------------------------
-	ands r0,r0,#0xFF			;@ Safety
-	bxeq lr
-	stmfd sp!,{r3-r8,lr}
-	ldr r5,=MEMMAPTBL_
-	ldr r2,[r5,r1,lsl#2]!
-	ldr r3,[r5,#-1024]			;@ RDMEMTBL_
-	ldr r4,[r5,#-2048]			;@ WRMEMTBL_
-
-	mov r5,#0
-	cmp r1,#0x88
-	movmi r5,#12
-
-	add r6,m6502ptr,#m6502ReadTbl
-	add r7,m6502ptr,#m6502WriteTbl
-	add r8,m6502ptr,#m6502MemTbl
-	b m6502MemAps
-m6502MemApl:
-	add r6,r6,#4
-	add r7,r7,#4
-	add r8,r8,#4
-m6502MemAp2:
-	add r3,r3,r5
-	sub r2,r2,#0x2000
-m6502MemAps:
-	movs r0,r0,lsr#1
-	bcc m6502MemApl				;@ C=0
-	strcs r3,[r6],#4			;@ readmem_tbl
-	strcs r4,[r7],#4			;@ writemem_tb
-	strcs r2,[r8],#4			;@ memmap_tbl
-	bne m6502MemAp2
-
-;@------------------------------------------
-m6502MapperEnd:		;@ Update cpu_pc & lastbank
-;@------------------------------------------
-	ldmfd sp!,{r3-r8,lr}
-	bx lr
-
 
 ;@----------------------------------------------------------------------------
 

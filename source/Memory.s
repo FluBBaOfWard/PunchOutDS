@@ -1,7 +1,7 @@
 #ifdef __arm__
 
 #include "ARMZ80/ARMZ80.i"
-#include "N2A03/RP2A03.i"
+#include "RP2A03/RP2A03.i"
 
 	.global empty_IO_R
 	.global empty_IO_W
@@ -11,6 +11,7 @@
 	.global ramZ80W
 	.global ram6502W
 	.global mem6502R0
+	.global mem6502R7
 	.global memZ80R0
 	.global memZ80R6
 	.global memZ80R7

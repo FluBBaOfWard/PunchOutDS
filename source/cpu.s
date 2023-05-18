@@ -3,7 +3,7 @@
 
 #include "Shared/nds_asm.h"
 #include "ARMZ80/ARMZ80.i"
-#include "N2A03/RP2A03.i"
+#include "RP2A03/RP2A03.i"
 #include "PUVideo.i"
 
 	.global run
@@ -14,6 +14,7 @@
 	.global waitMaskIn
 	.global waitMaskOut
 	.global cpu01SetIRQ
+	.global rp2A03_0
 	.global m6502Base
 
 
@@ -60,8 +61,8 @@ runStart:
 puFrameLoop:
 ;@----------------------------------------------------------------------------
 	ldr m6502ptr,=m6502Base
-	ldr r0,m6502CyclesPerScanline
-	bl m6502RestoreAndRunXCycles
+	ldr r0,rp2A03CyclesPerScanline
+	bl rp2A03RestoreAndRunXCycles
 	add r0,m6502ptr,#m6502Regs
 	stmia r0,{m6502nz-m6502pc,m6502zpage}	;@ Save M6502 state
 ;@--------------------------------------
@@ -102,11 +103,11 @@ cpu01SetIRQ:
 	bl Z80SetNMIPin
 	ldmfd sp!,{r0}
 	ldr m6502ptr,=m6502Base
-	bl m6502SetNMIPin
+	bl rp2A03SetNMIPin
 	ldmfd sp!,{z80ptr,pc}
 ;@----------------------------------------------------------------------------
 z80CyclesPerScanline:	.long 0
-m6502CyclesPerScanline:	.long 0
+rp2A03CyclesPerScanline:	.long 0
 frameTotal:			.long 0		;@ Let ui.c see frame count for savestates
 waitCountIn:		.byte 0
 waitMaskIn:			.byte 0
@@ -122,8 +123,8 @@ stepFrame:					;@ Return after 1 frame
 puStepLoop:
 ;@----------------------------------------------------------------------------
 	ldr m6502ptr,=m6502Base
-	ldr r0,m6502CyclesPerScanline
-	bl m6502RestoreAndRunXCycles
+	ldr r0,rp2A03CyclesPerScanline
+	bl rp2A03RestoreAndRunXCycles
 	add r0,m6502ptr,#m6502Regs
 	stmia r0,{m6502nz-m6502pc,m6502zpage}	;@ Save M6502 state
 ;@--------------------------------------
@@ -147,8 +148,13 @@ puStepLoop:
 
 ;@----------------------------------------------------------------------------
 cpuInit:
-	ldr r0,=m6502Base
-	b m6502Init
+	stmfd sp!,{m6502ptr,lr}
+	ldr r0,=rp2A03_0
+	bl rp2A03Init
+	ldr m6502ptr,=m6502Base
+	bl SetupM6502Mapping
+	ldmfd sp!,{m6502ptr,lr}
+	bx lr
 ;@----------------------------------------------------------------------------
 cpuReset:		;@ Called by loadCart/resetGame
 ;@----------------------------------------------------------------------------
@@ -170,15 +176,10 @@ cpuReset:		;@ Called by loadCart/resetGame
 
 ;@---Speed - 1.76MHz / 60Hz		;Punch Out 6502.
 	ldr r0,=113
-	str r0,m6502CyclesPerScanline
+	str r0,rp2A03CyclesPerScanline
 ;@--------------------------------------
-	ldr m6502ptr,=m6502Base
-
-	adr r4,cpuMapData+8
-	bl mapM6502Memory
-
-	mov r0,m6502ptr
-	bl m6502Reset
+	ldr r0,=rp2A03_0
+	bl rp2A03Reset
 
 	ldmfd sp!,{lr}
 	bx lr
@@ -194,7 +195,6 @@ cpuMapData:
 ;@	.byte 0x03,0x02,0x01,0x00,0xF9,0xF9,0xFF,0xFE			;@ Jail Break
 ;@	.byte 0xFF,0xFE,0x05,0x04,0x03,0x02,0x01,0x00			;@ Green Beret
 	.byte 0xFF,0xFE,0x05,0x04,0x03,0x02,0x01,0x00			;@ Punch-Out!! Z80
-	.byte 0x06,0xFB,0xFB,0xF0,0xFB,0xFC,0xFB,0xFD			;@ Punch-Out!! M6502
 ;@----------------------------------------------------------------------------
 mapZ80Memory:
 	stmfd sp!,{lr}
@@ -207,17 +207,6 @@ z80DataLoop:
 	bne z80DataLoop
 	ldmfd sp!,{pc}
 ;@----------------------------------------------------------------------------
-mapM6502Memory:
-	stmfd sp!,{lr}
-	mov r5,#0x80
-m6502DataLoop:
-	mov r0,r5
-	ldrb r1,[r4],#1
-	bl m6502Mapper
-	movs r5,r5,lsr#1
-	bne m6502DataLoop
-	ldmfd sp!,{pc}
-;@----------------------------------------------------------------------------
 #ifdef NDS
 	.section .dtcm, "ax", %progbits			;@ For the NDS
 #elif GBA
@@ -226,6 +215,8 @@ m6502DataLoop:
 	.section .text
 #endif
 ;@----------------------------------------------------------------------------
+rp2A03_0:
+	.space rp2A03Size
 m6502Base:
 	.space m6502Size
 ;@----------------------------------------------------------------------------

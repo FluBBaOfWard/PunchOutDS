@@ -6,9 +6,7 @@ extern "C" {
 #endif
 
 #include <maxmod9.h>
-#include "N2A03/RP2A03.h"
 
-extern RP2A03 rp2A03_0;
 void soundInit(void);
 void soundSetFrequency(void);
 void setMuteSoundGUI(void);

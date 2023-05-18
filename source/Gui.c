@@ -11,11 +11,11 @@
 #include "io.h"
 #include "cpu.h"
 #include "ARMZ80/Version.h"
-#include "N2A03/ARM6502/Version.h"
-#include "N2A03/Version.h"
+#include "RP2A03/ARM6502/Version.h"
+#include "RP2A03/Version.h"
 #include "VLM5030/Version.h"
 
-#define EMUVERSION "V0.4.1 2023-05-14"
+#define EMUVERSION "V0.4.1 2023-05-18"
 
 static void uiDebug(void);
 
