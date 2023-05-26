@@ -170,7 +170,7 @@ z80OutTbl:
 	.long empty_IO_W
 	.long empty_IO_W
 	.long protectionWrite
-	.long ppuNmiMaskW
+	.long nmiMaskW
 	.long empty_IO_W
 	.long punchoutLampsW
 	.long punchout2A03ResetW
@@ -180,11 +180,6 @@ z80OutTbl:
 	.long enableNVRAM
 
 
-;@----------------------------------------------------------------------------
-ppuNmiMaskW:
-;@----------------------------------------------------------------------------
-	ldr puptr,=puVideo_0
-	b nmiMaskWrite
 ;@----------------------------------------------------------------------------
 soundLatch00W:
 soundLatch01W:
@@ -196,13 +191,13 @@ enableNVRAM:
 ;@----------------------------------------------------------------------------
 soundLatch10W:
 ;@----------------------------------------------------------------------------
-	ldr r1,=rp2A03_0+rp2A03BaseAdr
+	ldr r1,=rp2A03_0
 	strb r0,[r1,#input0]
 	bx lr
 ;@----------------------------------------------------------------------------
 soundLatch11W:
 ;@----------------------------------------------------------------------------
-	ldr r1,=rp2A03_0+rp2A03BaseAdr
+	ldr r1,=rp2A03_0
 	strb r0,[r1,#input1]
 	bx lr
 

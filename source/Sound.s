@@ -25,7 +25,7 @@ soundInit:
 ;@----------------------------------------------------------------------------
 	stmfd sp!,{lr}
 
-	ldr r0,=rp2A03_0+rp2A03BaseAdr
+	ldr r0,=rp2A03_0
 //	bl rp2A03Init				;@ sound
 
 	ldmfd sp!,{lr}
@@ -36,7 +36,7 @@ soundReset:
 ;@----------------------------------------------------------------------------
 	stmfd sp!,{lr}
 
-//	ldr r0,=rp2A03_0+rp2A03BaseAdr
+//	ldr r0,=rp2A03_0
 //	bl rp2A03Reset				;@ sound
 
 	ldmfd sp!,{lr}
@@ -64,7 +64,7 @@ VblSound2:					;@ r0=length, r1=pointer, r2=formats?
 	cmp r2,#0
 	bne silenceMix
 
-	ldr rp2a03ptr,=rp2A03_0+rp2A03BaseAdr
+	ldr r12,=rp2A03_0
 	bl rp2A03Mixer
 
 	ldmfd sp,{r0}

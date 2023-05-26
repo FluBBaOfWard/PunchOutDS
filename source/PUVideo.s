@@ -21,7 +21,7 @@
 	.global convertTileMapPUVideoBS1
 	.global convertTileMapAWVideoBS1
 	.global convertTileMapPUVideoBS2
-	.global nmiMaskWrite
+	.global puvNmiMaskWrite
 
 
 	.syntax unified
@@ -291,7 +291,7 @@ newFrame:					;@ Called before line 0	(r0-r9 safe to use)
 	bx lr
 
 ;@----------------------------------------------------------------------------
-nmiMaskWrite:		;@
+puvNmiMaskWrite:		;@
 ;@----------------------------------------------------------------------------
 	strb r0,[puptr,#irqControl]
 	ands r0,r0,#1

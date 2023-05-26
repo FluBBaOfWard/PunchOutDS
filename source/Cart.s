@@ -422,46 +422,46 @@ tbloop2:
 	bx lr
 
 ;@----------------------------------------------------------------------------
-SetupM6502Mapping:			;@ Call with m6502ptr initialized
+SetupM6502Mapping:			;@ Call with rp2a03ptr initialized
 ;@----------------------------------------------------------------------------
 	mov r0,#0
 	ldr r1,=empty_R
 	ldr r2,=empty_W
 
-	str r0,[m6502ptr,#m6502MemTbl+4]	;@ MemMap
-	str r1,[m6502ptr,#m6502ReadTbl+4]	;@ RdMem
-	str r2,[m6502ptr,#m6502WriteTbl+4]	;@ WrMem
+	str r0,[rp2a03ptr,#m6502MemTbl+4]	;@ MemMap
+	str r1,[rp2a03ptr,#m6502ReadTbl+4]	;@ RdMem
+	str r2,[rp2a03ptr,#m6502WriteTbl+4]	;@ WrMem
 
-	str r0,[m6502ptr,#m6502MemTbl+12]	;@ MemMap
-	str r1,[m6502ptr,#m6502ReadTbl+12]	;@ RdMem
-	str r2,[m6502ptr,#m6502WriteTbl+12]	;@ WrMem
+	str r0,[rp2a03ptr,#m6502MemTbl+12]	;@ MemMap
+	str r1,[rp2a03ptr,#m6502ReadTbl+12]	;@ RdMem
+	str r2,[rp2a03ptr,#m6502WriteTbl+12]	;@ WrMem
 
-	str r0,[m6502ptr,#m6502MemTbl+16]	;@ MemMap
-	str r1,[m6502ptr,#m6502ReadTbl+16]	;@ RdMem
-	str r2,[m6502ptr,#m6502WriteTbl+16]	;@ WrMem
+	str r0,[rp2a03ptr,#m6502MemTbl+16]	;@ MemMap
+	str r1,[rp2a03ptr,#m6502ReadTbl+16]	;@ RdMem
+	str r2,[rp2a03ptr,#m6502WriteTbl+16]	;@ WrMem
 
-	str r0,[m6502ptr,#m6502MemTbl+20]	;@ MemMap
-	str r1,[m6502ptr,#m6502ReadTbl+20]	;@ RdMem
-	str r2,[m6502ptr,#m6502WriteTbl+20]	;@ WrMem
+	str r0,[rp2a03ptr,#m6502MemTbl+20]	;@ MemMap
+	str r1,[rp2a03ptr,#m6502ReadTbl+20]	;@ RdMem
+	str r2,[rp2a03ptr,#m6502WriteTbl+20]	;@ WrMem
 
-	str r0,[m6502ptr,#m6502MemTbl+24]	;@ MemMap
-	str r1,[m6502ptr,#m6502ReadTbl+24]	;@ RdMem
-	str r2,[m6502ptr,#m6502WriteTbl+24]	;@ WrMem
+	str r0,[rp2a03ptr,#m6502MemTbl+24]	;@ MemMap
+	str r1,[rp2a03ptr,#m6502ReadTbl+24]	;@ RdMem
+	str r2,[rp2a03ptr,#m6502WriteTbl+24]	;@ WrMem
 
 	ldr r0,=cpu2Ram
 	ldr r1,=mem6502R0
 	ldr r2,=ram6502W
-	str r0,[m6502ptr,#m6502MemTbl]		;@ MemMap
-	str r1,[m6502ptr,#m6502ReadTbl]		;@ RdMem
-	str r2,[m6502ptr,#m6502WriteTbl]	;@ WrMem
+	str r0,[rp2a03ptr,#m6502MemTbl]		;@ MemMap
+	str r1,[rp2a03ptr,#m6502ReadTbl]		;@ RdMem
+	str r2,[rp2a03ptr,#m6502WriteTbl]	;@ WrMem
 
 	ldr r0,cpu2Base
 	sub r0,r0,#0xE000
 	ldr r1,=mem6502R7
 	ldr r2,=rom_W
-	str r0,[m6502ptr,#m6502MemTbl+28]	;@ MemMap
-	str r1,[m6502ptr,#m6502ReadTbl+28]	;@ RdMem
-	str r2,[m6502ptr,#m6502WriteTbl+28]	;@ WrMem
+	str r0,[rp2a03ptr,#m6502MemTbl+28]	;@ MemMap
+	str r1,[rp2a03ptr,#m6502ReadTbl+28]	;@ RdMem
+	str r2,[rp2a03ptr,#m6502WriteTbl+28]	;@ WrMem
 
 	bx lr
 ;@----------------------------------------------------------------------------

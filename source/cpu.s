@@ -14,8 +14,8 @@
 	.global waitMaskIn
 	.global waitMaskOut
 	.global cpu01SetIRQ
+
 	.global rp2A03_0
-	.global m6502Base
 
 
 	.syntax unified
@@ -60,11 +60,11 @@ runStart:
 ;@----------------------------------------------------------------------------
 puFrameLoop:
 ;@----------------------------------------------------------------------------
-	ldr m6502ptr,=m6502Base
+	ldr rp2a03ptr,=rp2A03_0
 	ldr r0,rp2A03CyclesPerScanline
 	bl rp2A03RestoreAndRunXCycles
-	add r0,m6502ptr,#m6502Regs
-	stmia r0,{m6502nz-m6502pc,m6502zpage}	;@ Save M6502 state
+	add r0,rp2a03ptr,#m6502Regs
+	stmia r0,{m6502nz-m6502pc}				;@ Save M6502 state
 ;@--------------------------------------
 	ldr z80ptr,=Z80OpTable
 	ldr r0,z80CyclesPerScanline
@@ -102,7 +102,7 @@ cpu01SetIRQ:
 	ldr z80ptr,=Z80OpTable
 	bl Z80SetNMIPin
 	ldmfd sp!,{r0}
-	ldr m6502ptr,=m6502Base
+	ldr rp2a03ptr,=rp2A03_0
 	bl rp2A03SetNMIPin
 	ldmfd sp!,{z80ptr,pc}
 ;@----------------------------------------------------------------------------
@@ -122,11 +122,11 @@ stepFrame:					;@ Return after 1 frame
 ;@----------------------------------------------------------------------------
 puStepLoop:
 ;@----------------------------------------------------------------------------
-	ldr m6502ptr,=m6502Base
+	ldr rp2a03ptr,=rp2A03_0
 	ldr r0,rp2A03CyclesPerScanline
 	bl rp2A03RestoreAndRunXCycles
-	add r0,m6502ptr,#m6502Regs
-	stmia r0,{m6502nz-m6502pc,m6502zpage}	;@ Save M6502 state
+	add r0,rp2a03ptr,#m6502Regs
+	stmia r0,{m6502nz-m6502pc}				;@ Save M6502 state
 ;@--------------------------------------
 	ldr z80ptr,=Z80OpTable
 	ldr r0,z80CyclesPerScanline
@@ -148,12 +148,12 @@ puStepLoop:
 
 ;@----------------------------------------------------------------------------
 cpuInit:
-	stmfd sp!,{m6502ptr,lr}
+	stmfd sp!,{rp2a03ptr,lr}
 	ldr r0,=rp2A03_0
 	bl rp2A03Init
-	ldr m6502ptr,=m6502Base
+	ldr rp2a03ptr,=rp2A03_0
 	bl SetupM6502Mapping
-	ldmfd sp!,{m6502ptr,lr}
+	ldmfd sp!,{rp2a03ptr,lr}
 	bx lr
 ;@----------------------------------------------------------------------------
 cpuReset:		;@ Called by loadCart/resetGame
@@ -174,7 +174,7 @@ cpuReset:		;@ Called by loadCart/resetGame
 	bl Z80Reset
 
 
-;@---Speed - 1.76MHz / 60Hz		;Punch Out 6502.
+;@---Speed - 1.76MHz / 60Hz		;Punch Out RP2A03.
 	ldr r0,=113
 	str r0,rp2A03CyclesPerScanline
 ;@--------------------------------------
@@ -217,8 +217,6 @@ z80DataLoop:
 ;@----------------------------------------------------------------------------
 rp2A03_0:
 	.space rp2A03Size
-m6502Base:
-	.space m6502Size
 ;@----------------------------------------------------------------------------
 	.end
 #endif // #ifdef __arm__

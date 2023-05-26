@@ -11,6 +11,7 @@
 	.global paletteTxAll
 	.global refreshGfx
 	.global endFrame
+	.global nmiMaskW
 	.global gfxState
 //	.global oamBufferReady
 	.global gScaling
@@ -635,6 +636,11 @@ endFrameCommon:
 	ldmfd sp!,{r3,lr}
 	bx lr
 
+;@----------------------------------------------------------------------------
+nmiMaskW:
+;@----------------------------------------------------------------------------
+	ldr puptr,=puVideo_0
+	b puvNmiMaskWrite
 ;@----------------------------------------------------------------------------
 tmpOamBuffer:		.long OAM_BUFFER1
 dmaOamBuffer:		.long OAM_BUFFER2
