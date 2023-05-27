@@ -64,7 +64,7 @@ VblSound2:					;@ r0=length, r1=pointer, r2=formats?
 	cmp r2,#0
 	bne silenceMix
 
-	ldr r12,=rp2A03_0
+	ldr r2,=rp2A03_0
 	bl rp2A03Mixer
 
 	ldmfd sp,{r0}

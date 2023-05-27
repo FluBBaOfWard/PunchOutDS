@@ -149,10 +149,14 @@ puStepLoop:
 ;@----------------------------------------------------------------------------
 cpuInit:
 	stmfd sp!,{rp2a03ptr,lr}
-	ldr r0,=rp2A03_0
-	bl rp2A03Init
 	ldr rp2a03ptr,=rp2A03_0
+	mov r0,rp2a03ptr
+	bl rp2A03Init
 	bl SetupM6502Mapping
+	ldr r0,=soundLatch10R
+	str r0,[rp2a03ptr,#rp2A03IORead0]
+	ldr r0,=soundLatch11R
+	str r0,[rp2a03ptr,#rp2A03IORead1]
 	ldmfd sp!,{rp2a03ptr,lr}
 	bx lr
 ;@----------------------------------------------------------------------------

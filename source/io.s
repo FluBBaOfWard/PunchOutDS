@@ -9,6 +9,8 @@
 	.global Z80In
 	.global Z80Out
 	.global refreshEMUjoypads
+	.global soundLatch10R
+	.global soundLatch11R
 
 	.global joyCfg
 	.global EMUinput
@@ -87,6 +89,11 @@ gDipSwitch2:	.byte 0
 gDipSwitch3:	.byte 0
 coinCounter0:	.long 0
 coinCounter1:	.long 0
+
+latch0:			.byte 0
+latch1:			.byte 0
+latch2:			.byte 0
+latch3:			.byte 0
 
 EMUinput:			;@ This label here for main.c to use
 	.long 0			;@ EMUjoypad (this is what Emu sees)
@@ -191,14 +198,22 @@ enableNVRAM:
 ;@----------------------------------------------------------------------------
 soundLatch10W:
 ;@----------------------------------------------------------------------------
-	ldr r1,=rp2A03_0
-	strb r0,[r1,#input0]
+	strb r0,latch2
 	bx lr
 ;@----------------------------------------------------------------------------
 soundLatch11W:
 ;@----------------------------------------------------------------------------
-	ldr r1,=rp2A03_0
-	strb r0,[r1,#input1]
+	strb r0,latch3
+	bx lr
+;@----------------------------------------------------------------------------
+soundLatch10R:
+;@----------------------------------------------------------------------------
+	ldrb r0,latch2
+	bx lr
+;@----------------------------------------------------------------------------
+soundLatch11R:
+;@----------------------------------------------------------------------------
+	ldrb r0,latch3
 	bx lr
 
 ;@----------------------------------------------------------------------------
