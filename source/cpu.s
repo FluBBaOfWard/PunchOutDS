@@ -179,7 +179,7 @@ cpuReset:		;@ Called by loadCart/resetGame
 
 
 ;@---Speed - 1.76MHz / 60Hz		;Punch Out RP2A03.
-	ldr r0,=113
+	ldr r0,=341
 	str r0,rp2A03CyclesPerScanline
 ;@--------------------------------------
 	ldr r0,=rp2A03_0

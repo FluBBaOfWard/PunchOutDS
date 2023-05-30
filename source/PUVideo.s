@@ -97,7 +97,7 @@ puVideoReset:		;@ r0=NMI(frameIrqFunc), r1=game, r2=ram
 	ldr r1,=puVideoSize/4
 	bl memclr_					;@ Clear VDP state
 
-	ldr r2,=VDPLineStateTable
+	ldr r2,=PUVLineStateTable
 	ldr r1,[r2],#4
 	mov r0,#0
 	stmia puptr,{r0-r2}			;@ Reset scanline, nextLineChange & lineState
@@ -232,9 +232,9 @@ bgChrLoop1:
 	bcc bgChrLoop2
 	bx lr
 ;@----------------------------------------------------------------------------
-VDPLineStateTable:
-	.long 0, newFrame			;@ vdpZeroLine
-	.long 223, endFrame			;@ vdpLastScanline
+PUVLineStateTable:
+	.long 0, newFrame			;@ puvZeroLine
+	.long 223, endFrame			;@ puvLastScanline
 	.long 224, checkFrameIRQ	;@ frameIRQ on
 	.long 225, clearFrameIRQ	;@ frameIRQ off
 	.long 264, frameEndHook		;@ totalScanlines
@@ -261,6 +261,14 @@ doScanline:
 	bx lr
 
 ;@----------------------------------------------------------------------------
+newFrame:					;@ Called before line 0
+;@----------------------------------------------------------------------------
+//	mov r0,#0
+//	str r0,[puptr,#scanline]	;@ Reset scanline count
+//	strb r0,lineState			;@ Reset line state
+	bx lr
+
+;@----------------------------------------------------------------------------
 checkFrameIRQ:
 ;@----------------------------------------------------------------------------
 	ldrb r0,[puptr,#irqControl]
@@ -274,21 +282,13 @@ clearFrameIRQ:
 	ldr pc,[puptr,#frameIrqFunc]
 ;@----------------------------------------------------------------------------
 frameEndHook:
-	ldr r2,=VDPLineStateTable
+	ldr r2,=PUVLineStateTable
 	ldr r1,[r2],#4
 	mov r0,#0
 	stmia puptr,{r0-r2}			;@ Reset scanline, nextLineChange & lineState
 
 	mov r0,#1
 	ldmfd sp!,{pc}
-
-;@----------------------------------------------------------------------------
-newFrame:					;@ Called before line 0	(r0-r9 safe to use)
-;@----------------------------------------------------------------------------
-//	mov r0,#0
-//	str r0,[puptr,#scanline]	;@ Reset scanline count
-//	strb r0,lineState			;@ Reset line state
-	bx lr
 
 ;@----------------------------------------------------------------------------
 puvNmiMaskWrite:		;@
