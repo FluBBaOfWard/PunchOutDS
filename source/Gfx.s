@@ -442,7 +442,7 @@ vblIrqHandler:
 	bl calculateFPS
 
 	ldrb r0,gScaling
-	cmp r0,#0
+	tst r0,#SCALED
 	moveq r6,#0
 	ldrne r6,=0x80000000 + ((GAME_HEIGHT-SCREEN_HEIGHT)*0x10000) / (SCREEN_HEIGHT-1)		;@ NDS 0x2B10 (was 0x2AAB)
 	ldrbeq r8,yStart

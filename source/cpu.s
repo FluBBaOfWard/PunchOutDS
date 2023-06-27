@@ -1,4 +1,3 @@
-
 #ifdef __arm__
 
 #include "Shared/nds_asm.h"
@@ -10,11 +9,11 @@
 	.global stepFrame
 	.global cpuInit
 	.global cpuReset
+	.global cpu01SetIRQ
+
 	.global frameTotal
 	.global waitMaskIn
 	.global waitMaskOut
-	.global cpu01SetIRQ
-
 	.global rp2A03_0
 
 
@@ -55,7 +54,7 @@ runStart:
 	movpl r1,#GAME_HEIGHT-SCREEN_HEIGHT
 	strb r1,[r2]
 
-	bl refreshEMUjoypads		;@ Z=1 if communication ok
+	bl refreshEMUjoypads
 
 ;@----------------------------------------------------------------------------
 puFrameLoop:

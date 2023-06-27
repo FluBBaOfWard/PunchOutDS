@@ -49,6 +49,8 @@
 		9C7BB97326012B3D00EA9C9C /* EmuFont.grit */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = EmuFont.grit; sourceTree = "<group>"; };
 		9C7BB97426012B3D00EA9C9C /* EmuFont.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EmuFont.png; sourceTree = "<group>"; };
 		9C8F3400248ACB7600996E5A /* nds_asm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = nds_asm.h; sourceTree = "<group>"; };
+		9CA4421D2A2CFF1400259966 /* ArcadeRoms.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = ArcadeRoms.c; sourceTree = "<group>"; };
+		9CA4421E2A2CFF1400259966 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9CBEE0D126EDE85B0095347A /* EmuSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmuSettings.h; sourceTree = "<group>"; };
 		9CBEE11426F3C2100095347A /* VLM503Asm.s */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.asm; path = VLM503Asm.s; sourceTree = "<group>"; };
 		A41716F2208BCF2D00EA6CA1 /* punchout.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = punchout.cpp; sourceTree = "<group>"; };
@@ -121,8 +123,8 @@
 		9C3A89F82A115A1A007609DE /* ARM6502 */ = {
 			isa = PBXGroup;
 			children = (
-				9C3A89FA2A115A1A007609DE /* ARM6502_todo.txt */,
 				9C3A89FB2A115A1A007609DE /* README.md */,
+				9C3A89FA2A115A1A007609DE /* ARM6502_todo.txt */,
 				9C3A89FF2A115A1A007609DE /* History.txt */,
 				9C3A89F92A115A1A007609DE /* Version.h */,
 				9C3A89FD2A115A1A007609DE /* M6502.h */,
@@ -170,6 +172,7 @@
 			children = (
 				9C7BB97226012B3D00EA9C9C /* graphics */,
 				A47F095D2087BFC0004E1DA6 /* Unzip */,
+				9CA4421E2A2CFF1400259966 /* README.md */,
 				9C8F3400248ACB7600996E5A /* nds_asm.h */,
 				9CBEE0D126EDE85B0095347A /* EmuSettings.h */,
 				A47F092820863384004E1DA6 /* EmuMenu.h */,
@@ -182,6 +185,7 @@
 				A4D0E1222089E5EE00401463 /* AsmExtra.s */,
 				9C29495E2610854500EDA7C9 /* EmubaseAC.h */,
 				9C29495F2610854500EDA7C9 /* ArcadeRoms.h */,
+				9CA4421D2A2CFF1400259966 /* ArcadeRoms.c */,
 			);
 			path = Shared;
 			sourceTree = "<group>";

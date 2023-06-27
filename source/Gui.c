@@ -15,7 +15,7 @@
 #include "RP2A03/Version.h"
 #include "VLM5030/Version.h"
 
-#define EMUVERSION "V0.4.1 2023-05-27"
+#define EMUVERSION "V0.4.1 2023-06-27"
 
 static void uiDebug(void);
 
@@ -140,7 +140,7 @@ void uiController() {
 
 void uiDisplay() {
 	setupSubMenu("Display Settings");
-	drawSubItem("Display:", dispTxt[gScaling]);
+	drawSubItem("Display:", dispTxt[gScaling&SCALED]);
 	drawSubItem("Scaling:", flickTxt[gFlicker]);
 	drawSubItem("Gamma:", brighTxt[gGammaValue]);
 }
@@ -214,7 +214,7 @@ void swapABSet() {
 
 /// Turn on/off scaling
 void scalingSet(){
-	gScaling ^= 0x01;
+	gScaling ^= SCALED;
 	refreshGfx();
 }
 

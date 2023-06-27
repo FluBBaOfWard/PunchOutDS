@@ -16,7 +16,6 @@ extern u8 ROM_Space[0x5ED00];
 
 void machineInit(void);
 void loadCart(int, int);
-void ejectCart(void);
 
 #ifdef __cplusplus
 } // extern "C"

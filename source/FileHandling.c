@@ -40,8 +40,8 @@ int loadSettings() {
 		return 1;
 	}
 
-	gScaling     = cfg.scaling&1;
-	gFlicker     = cfg.flicker&1;
+	gScaling     = cfg.scaling & SCALED;
+	gFlicker     = cfg.flicker & 1;
 	gGammaValue  = cfg.gammaValue;
 	emuSettings  = (cfg.emuSettings & ~EMUSPEED_MASK) ^ MAIN_ON_BOTTOM;	// Clear speed setting, XOR emu on bottom.
 	sleepTime    = cfg.sleepTime;
@@ -59,8 +59,8 @@ void saveSettings() {
 	FILE *file;
 
 	strcpy(cfg.magic,"cfg");
-	cfg.scaling     = gScaling&1;
-	cfg.flicker     = gFlicker&1;
+	cfg.scaling     = gScaling & SCALED;
+	cfg.flicker     = gFlicker & 1;
 	cfg.gammaValue  = gGammaValue;
 	cfg.emuSettings = (emuSettings & ~EMUSPEED_MASK) ^ MAIN_ON_BOTTOM;	// Clear speed setting, XOR emu on bottom.
 	cfg.sleepTime   = sleepTime;
