@@ -15,11 +15,14 @@
 //	.global scaling
 	.global cartFlags
 	.global romStart
+	.global mainCpu
+	.global soundCpu
 	.global vromBase0
 	.global vromBase1
 	.global vromBase2
 	.global vromBase3
 	.global promBase
+	.global vlmBase
 
 	.global cpu2Ram
 	.global NV_RAM
@@ -326,7 +329,7 @@ machineInit: 	;@ Called from C
 
 	str r0,romStart				;@ Set rom base
 	add r0,r0,#0xC000			;@ 0xC000
-	str r0,cpu2Base				;@ Sound cpu rom
+	str r0,soundCpu				;@ Sound cpu rom
 	add r0,r0,#0x2000			;@ 0x2000
 	str r0,vromBase0			;@ Top tile map
 	add r0,r0,#0x8000
@@ -455,7 +458,7 @@ SetupM6502Mapping:			;@ Call with rp2a03ptr initialized
 	str r1,[rp2a03ptr,#m6502ReadTbl]		;@ RdMem
 	str r2,[rp2a03ptr,#m6502WriteTbl]	;@ WrMem
 
-	ldr r0,cpu2Base
+	ldr r0,soundCpu
 	sub r0,r0,#0xE000
 	ldr r1,=mem6502R7
 	ldr r2,=rom_W
@@ -521,8 +524,9 @@ cartFlags:
 	.space 3
 
 romStart:
+mainCpu:
 	.long 0
-cpu2Base:
+soundCpu:
 	.long 0
 vromBase0:
 	.long 0
