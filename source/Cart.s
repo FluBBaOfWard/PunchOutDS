@@ -542,6 +542,7 @@ vlmBase:
 	.long 0
 
 	.section .bss
+	.align 8
 WRMEMTBL_:
 	.space 256*4
 RDMEMTBL_:

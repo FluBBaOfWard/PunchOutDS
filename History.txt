@@ -2,7 +2,7 @@ PunchOutDS revision history
 -=-=-=-=-=-=-=-=-=-=-=-=-=-=-
 
 
-V0.4.1 - 2024-02-24 (FluBBa)
+V0.4.1 - 2024-07-29 (FluBBa)
 	Added new debug menu.
 	Better menu traversing.
 	Moved ARM6502 to be a submodule of RP2A03.

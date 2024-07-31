@@ -15,7 +15,7 @@
 #include "RP2A03/Version.h"
 #include "VLM5030/Version.h"
 
-#define EMUVERSION "V0.4.1 2024-02-24"
+#define EMUVERSION "V0.4.1 2024-07-29"
 
 static void uiDebug(void);
 

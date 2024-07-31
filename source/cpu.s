@@ -61,7 +61,9 @@ puFrameLoop:
 ;@----------------------------------------------------------------------------
 	ldr rp2a03ptr,=rp2A03_0
 	ldr r0,rp2A03CyclesPerScanline
-	bl rp2A03RestoreAndRunXCycles
+	add r1,m6502ptr,#m6502Regs
+	ldmia r1,{m6502nz-m6502pc,m6502zpage}	;@ Restore M6502 state
+	bl rp2A03RunXCycles
 	add r0,rp2a03ptr,#m6502Regs
 	stmia r0,{m6502nz-m6502pc}				;@ Save M6502 state
 ;@--------------------------------------
@@ -95,15 +97,14 @@ puFrameLoop:
 	b runStart
 
 ;@----------------------------------------------------------------------------
-cpu01SetIRQ:
+cpu01SetIRQ:				;@ r0=pin state
 ;@----------------------------------------------------------------------------
-	stmfd sp!,{r0,z80ptr,lr}
-	ldr z80ptr,=Z80OpTable
-	bl Z80SetNMIPin
-	ldmfd sp!,{r0}
+	stmfd sp!,{r0,rp2a03ptr,lr}
 	ldr rp2a03ptr,=rp2A03_0
 	bl rp2A03SetNMIPin
-	ldmfd sp!,{z80ptr,pc}
+	ldmfd sp!,{r0,rp2a03ptr,lr}
+	ldr r1,=Z80OpTable
+	b Z80SetNMIPin
 ;@----------------------------------------------------------------------------
 z80CyclesPerScanline:	.long 0
 rp2A03CyclesPerScanline:	.long 0
@@ -123,7 +124,9 @@ puStepLoop:
 ;@----------------------------------------------------------------------------
 	ldr rp2a03ptr,=rp2A03_0
 	ldr r0,rp2A03CyclesPerScanline
-	bl rp2A03RestoreAndRunXCycles
+	add r1,m6502ptr,#m6502Regs
+	ldmia r1,{m6502nz-m6502pc,m6502zpage}	;@ Restore M6502 state
+	bl rp2A03RunXCycles
 	add r0,rp2a03ptr,#m6502Regs
 	stmia r0,{m6502nz-m6502pc}				;@ Save M6502 state
 ;@--------------------------------------
@@ -182,6 +185,7 @@ cpuReset:		;@ Called by loadCart/resetGame
 	str r0,rp2A03CyclesPerScanline
 ;@--------------------------------------
 	ldr r0,=rp2A03_0
+	mov r1,#REV_RP2A03
 	bl rp2A03Reset
 
 	ldmfd sp!,{lr}
@@ -217,6 +221,7 @@ z80DataLoop:
 #else
 	.section .text
 #endif
+	.align 2
 ;@----------------------------------------------------------------------------
 rp2A03_0:
 	.space rp2A03Size
