@@ -1,4 +1,3 @@
-
 #ifdef __arm__
 
 #include "Shared/EmuSettings.h"
@@ -6,10 +5,6 @@
 #include "RP2A03/RP2A03.i"
 #include "PUVideo.i"
 
-	.global machineInit
-	.global loadCart
-	.global z80Mapper
-	.global SetupM6502Mapping
 	.global romNum
 	.global emuFlags
 //	.global scaling
@@ -29,6 +24,10 @@
 	.global EMU_RAM
 	.global ROM_Space
 
+	.global machineInit
+	.global loadCart
+	.global z80Mapper
+	.global SetupM6502Mapping
 
 
 	.syntax unified

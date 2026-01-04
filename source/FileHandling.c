@@ -11,6 +11,7 @@
 #include "Cart.h"
 #include "Gfx.h"
 #include "io.h"
+#include "PunchOut.h"
 
 static const char *const folderName = "acds";
 static const char *const settingName = "settings.cfg";

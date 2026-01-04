@@ -14,9 +14,9 @@ You should still be able to enjoy the games though. =)
 3. Depending on your flashcart you might have to DLDI patch the emulator.
 
 When the emulator starts, you can either press L+R or tap on the screen to open
-up the menu (the emulator tries to load "Punch-Out!! (Rev B)" automagically on
-startup). Now you can use the cross or touchscreen to navigate the menus, A or
-double tap to select an option, B or the top of the screen to go back a step.
+ up the menu (the emulator tries to load "Punch-Out!! (Rev B)" automagically on
+ startup). Now you can use the cross or touchscreen to navigate the menus, A or
+ double tap to select an option, B or the top of the screen to go back a step.
 
 To select between the tabs use R & L or the touchscreen.
 
@@ -82,6 +82,8 @@ Nicola Salmoria, for the MAME driver.
 
 Fredrik Ahlström
 
-Twitter @TheRealFluBBa
+<https://bsky.app/profile/therealflubba.bsky.social>
 
-http://www.github.com/FluBBaOfWard
+<https://www.github.com/FluBBaOfWard>
+
+X/Twitter @TheRealFluBBa
