@@ -63,7 +63,7 @@ int main(int argc, char **argv) {
 	setupGUI();
 	getInput();
 	machineInit();
-	if ( initFileHelper() ) {
+	if (initFileHelper()) {
 		loadSettings();
 		autoLoadGame();
 	}

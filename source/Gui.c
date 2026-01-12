@@ -16,7 +16,7 @@
 #include "RP2A03/Version.h"
 #include "VLM5030/Version.h"
 
-#define EMUVERSION "V0.4.1 2026-01-04"
+#define EMUVERSION "V0.4.1 2026-01-12"
 
 static void scalingSet(void);
 static const char *getScalingText(void);
@@ -61,9 +61,9 @@ const MItem fileItems[] = {
 const MItem optionItems[] = {
 	{"Controller", ui4},
 	{"Display", ui5},
-	{"Settings", ui6},
-	{"Debug", ui7},
-	{"DipSwitches", ui8},
+	{"DipSwitches", ui6},
+	{"Settings", ui7},
+	{"Debug", ui8},
 };
 const MItem ctrlItems[] = {
 	{"B Autofire:", autoBSet, getAutoBText},
@@ -75,6 +75,15 @@ const MItem displayItems[] = {
 	{"Display:", scalingSet, getScalingText},
 	{"Scaling:", flickSet, getFlickText},
 	{"Gamma:", gammaSet, getGammaText},
+};
+const MItem dipItems[] = {
+	{"Coin A:", coinASet, getCoinAText},
+	{"Difficulty:", difficultSet, getDifficultText},
+	{"Time:", timeSet, getTimeText},
+	{"Demo Sound:", demoSet, getDemoText},
+	{"Discount:", discountSet, getDiscountText},
+	{"Service Mode:", serviceSet, getServiceText},
+	{"Copyright:", copyrightSet, getcopyrightText},
 };
 const MItem setItems[] = {
 	{"Speed:", speedSet, getSpeedText},
@@ -92,15 +101,6 @@ const MItem debugItems[] = {
 	{"Disable Sprites:", sprLayerSet, getSprLayerText},
 	{"Step Frame", stepFrame},
 };
-const MItem dipItems[] = {
-	{"Coin A:", coinASet, getCoinAText},
-	{"Difficulty:", difficultSet, getDifficultText},
-	{"Time:", timeSet, getTimeText},
-	{"Demo Sound:", demoSet, getDemoText},
-	{"Discount:", discountSet, getDiscountText},
-	{"Service Mode:", serviceSet, getServiceText},
-	{"Copyright:", copyrightSet, getcopyrightText},
-};
 const MItem fnList9[ARRSIZE(punchoutGames)] = {
 	{"",quickSelectGame}, {"",quickSelectGame}, {"",quickSelectGame}, {"",quickSelectGame}, {"",quickSelectGame}, {"",quickSelectGame}, {"",quickSelectGame}, {"",quickSelectGame},
 };
@@ -115,20 +115,17 @@ const Menu menu2 = MENU_M("", uiAuto, optionItems);
 const Menu menu3 = MENU_M("", uiAbout, dummyItems);
 const Menu menu4 = MENU_M("Controller Settings", uiAuto, ctrlItems);
 const Menu menu5 = MENU_M("Display Settings", uiAuto, displayItems);
-const Menu menu6 = MENU_M("Settings", uiAuto, setItems);
-const Menu menu7 = MENU_M("Debug", uiAuto, debugItems);
-const Menu menu8 = MENU_M("Dipswitch Settings", uiAuto, dipItems);
+const Menu menu6 = MENU_M("Dipswitch Settings", uiAuto, dipItems);
+const Menu menu7 = MENU_M("Settings", uiAuto, setItems);
+const Menu menu8 = MENU_M("Debug", uiAuto, debugItems);
 const Menu menu9 = MENU_M("Load Game", uiLoadGame, fnList9);
 const Menu menu10 = MENU_M("", uiDummy, dummyItems);
 const Menu menu11 = MENU_M("Quit Emulator?", uiAuto, quitItems);
 
 const Menu *const menus[] = {&menu0, &menu1, &menu2, &menu3, &menu4, &menu5, &menu6, &menu7, &menu8, &menu9, &menu10, &menu11 };
 
-char *const speedTxt[] = {"Normal", "200%", "Max", "50%"};
-char *const sleepTxt[] = {"5min", "10min", "30min", "Off"};
 char *const ctrlTxt[] = {"1P", "2P"};
 char *const dispTxt[] = {"Unscaled", "Scaled"};
-char *const flickTxt[] = {"No Flicker", "Flicker"};
 
 char *const coinTxt[] = {
 	"1 Coin 1 Credit","2 Coin 1 Credits","1 Coin 2 Credits","1 Coin 1 Credit",
@@ -186,6 +183,12 @@ void uiAbout() {
 	drawMenuText("X:         Right punch", 9, 0);
 	drawMenuText("A:         Super punch", 10, 0);
 	drawMenuText("B:         Duck (Joystick up)", 11, 0);
+
+	char s[10];
+	int2Str(coinCounter0, s);
+	drawStrings("CoinCounter1:", s, 1, 15, 0);
+	int2Str(coinCounter1, s);
+	drawStrings("CoinCounter2:", s, 1, 16, 0);
 
 	drawMenuText("PunchOutDS   " EMUVERSION, 19, 0);
 	drawMenuText("ARMZ80       " ARMZ80VERSION, 20, 0);

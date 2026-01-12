@@ -27,7 +27,7 @@ int loadSettings() {
 	if (findFolder(folderName)) {
 		return 1;
 	}
-	if ( (file = fopen(settingName, "r")) ) {
+	if ((file = fopen(settingName, "r"))) {
 		fread(&cfg, 1, sizeof(ConfigData), file);
 		fclose(file);
 		if (!strstr(cfg.magic, "cfg")) {
@@ -75,7 +75,7 @@ void saveSettings() {
 	if (findFolder(folderName)) {
 		return;
 	}
-	if ( (file = fopen(settingName, "w")) ) {
+	if ((file = fopen(settingName, "w"))) {
 		fwrite(&cfg, 1, sizeof(ConfigData), file);
 		fclose(file);
 		infoOutput("Settings saved.");
@@ -94,7 +94,7 @@ int loadNVRAM() {
 		return 1;
 	}
 	setFileExtension(nvRamName, currentFilename, ".sav", sizeof(nvRamName));
-	if ( (file = fopen(nvRamName, "r")) ) {
+	if ((file = fopen(nvRamName, "r"))) {
 		fread(NV_RAM, 1, sizeof(NV_RAM), file);
 		fclose(file);
 		infoOutput("NVRAM loaded.");
@@ -111,7 +111,7 @@ void saveNVRAM() {
 		return;
 	}
 	setFileExtension(nvRamName, currentFilename, ".sav", sizeof(nvRamName));
-	if ( (file = fopen(nvRamName, "w")) ) {
+	if ((file = fopen(nvRamName, "w"))) {
 		fwrite(NV_RAM, 1, sizeof(NV_RAM), file);
 		fclose(file);
 		infoOutput("NVRAM saved.");
