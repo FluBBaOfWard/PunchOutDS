@@ -62,9 +62,11 @@ int main(int argc, char **argv) {
 	irqSet(IRQ_VBLANK, myVblank);
 	setupGUI();
 	getInput();
+	initSettings();
+	bool fsOk = initFileHelper();
+	loadSettings();
 	machineInit();
-	if (initFileHelper()) {
-		loadSettings();
+	if (fsOk) {
 		autoLoadGame();
 	}
 	else {

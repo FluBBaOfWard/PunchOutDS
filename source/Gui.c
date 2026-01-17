@@ -16,7 +16,7 @@
 #include "RP2A03/Version.h"
 #include "VLM5030/Version.h"
 
-#define EMUVERSION "V0.4.1 2026-01-12"
+#define EMUVERSION "V0.4.1 2026-01-17"
 
 static void scalingSet(void);
 static const char *getScalingText(void);
@@ -138,7 +138,6 @@ char *const ninTxt[] = {"Nintendo", "Nintendo of America"};
 
 
 void setupGUI() {
-	emuSettings = AUTOPAUSE_EMULATION | MAIN_ON_BOTTOM;
 	keysSetRepeat(25, 4);	// delay, repeat.
 	menu1.itemCount = ARRSIZE(fileItems) - (enableExit?0:1);
 	openMenu();

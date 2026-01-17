@@ -20,70 +20,92 @@ ConfigData cfg;
 static int selectedGame = 0;
 
 //---------------------------------------------------------------------------------
-
-int loadSettings() {
-	FILE *file;
-
-	if (findFolder(folderName)) {
-		return 1;
-	}
-	if ((file = fopen(settingName, "r"))) {
-		fread(&cfg, 1, sizeof(ConfigData), file);
-		fclose(file);
-		if (!strstr(cfg.magic, "cfg")) {
-			infoOutput("Error in settings file.");
-			return 1;
-		}
-	}
-	else {
-		infoOutput("Couldn't open file:");
-		infoOutput(settingName);
-		return 1;
-	}
-
+void applyConfigData(void) {
+	emuSettings  = (cfg.emuSettings & ~EMUSPEED_MASK) ^ MAIN_ON_BOTTOM;	// Clear speed setting, XOR emu on bottom.
 	gScaling     = cfg.scaling & SCALED;
 	gFlicker     = cfg.flicker & 1;
 	gGammaValue  = cfg.gammaValue;
-	emuSettings  = (cfg.emuSettings & ~EMUSPEED_MASK) ^ MAIN_ON_BOTTOM;	// Clear speed setting, XOR emu on bottom.
 	sleepTime    = cfg.sleepTime;
-	joyCfg       = (joyCfg &~ 0x400)|((cfg.controller & 1)<<10);
+	joyCfg       = (joyCfg &~ 0x400) | ((cfg.controller & 1) << 10);
 	strlcpy(currentDir, cfg.currentPath, sizeof(currentDir));
+	coinCounter0 = cfg.coinCounter0;
+	coinCounter1 = cfg.coinCounter1;
+
 	gDipSwitch0  = cfg.dipSwitchPO0;
 	gDipSwitch1  = cfg.dipSwitchPO1;
 	gDipSwitch2  = cfg.dipSwitchPO2;
 	gDipSwitch3  = cfg.dipSwitchPO3;
-
-	infoOutput("Settings loaded.");
-	return 0;
 }
-void saveSettings() {
-	FILE *file;
 
-	strcpy(cfg.magic,"cfg");
+void updateConfigData(void) {
+	strcpy(cfg.magic, "cfg");
+	cfg.emuSettings = (emuSettings & ~EMUSPEED_MASK) ^ MAIN_ON_BOTTOM;	// Clear speed setting, XOR emu on bottom.
 	cfg.scaling     = gScaling & SCALED;
 	cfg.flicker     = gFlicker & 1;
 	cfg.gammaValue  = gGammaValue;
-	cfg.emuSettings = (emuSettings & ~EMUSPEED_MASK) ^ MAIN_ON_BOTTOM;	// Clear speed setting, XOR emu on bottom.
 	cfg.sleepTime   = sleepTime;
-	cfg.controller  = (joyCfg>>10)&1;
+	cfg.controller  = (joyCfg >> 10) & 1;
 	strlcpy(cfg.currentPath, currentDir, sizeof(currentDir));
+	cfg.coinCounter0 = coinCounter0;
+	cfg.coinCounter1 = coinCounter1;
+
 	cfg.dipSwitchPO0 = gDipSwitch0;
 	cfg.dipSwitchPO1 = gDipSwitch1;
 	cfg.dipSwitchPO2 = gDipSwitch2;
 	cfg.dipSwitchPO3 = gDipSwitch3;
+}
 
-	if (findFolder(folderName)) {
-		return;
-	}
-	if ((file = fopen(settingName, "w"))) {
-		fwrite(&cfg, 1, sizeof(ConfigData), file);
+void initSettings() {
+	memset(&cfg, 0, sizeof(ConfigData));
+	cfg.emuSettings  = AUTOPAUSE_EMULATION | AUTOLOAD_NVRAM | AUTOSLEEP_OFF | MAIN_ON_BOTTOM;
+	cfg.scaling      = SCALED;
+	cfg.flicker      = 1;
+	cfg.sleepTime    = 60*60*5;
+	cfg.dipSwitchPO1 = 0x15; // Lives, cabinet & demo sound.
+
+	applyConfigData();
+}
+
+int loadSettings() {
+	FILE *file;
+	if (!findFolder(folderName)
+		&& (file = fopen(settingName, "r"))) {
+		int len = fread(&cfg, 1, sizeof(ConfigData), file);
 		fclose(file);
-		infoOutput("Settings saved.");
+		if (strstr(cfg.magic, "cfg") && len == sizeof(ConfigData)) {
+			applyConfigData();
+			infoOutput("Settings loaded.");
+			return 0;
+		}
+		updateConfigData();
+		infoOutput("Error in settings file.");
 	}
 	else {
 		infoOutput("Couldn't open file:");
 		infoOutput(settingName);
 	}
+	return 1;
+}
+
+int saveSettings() {
+	updateConfigData();
+
+	FILE *file;
+	if (!findFolder(folderName)
+		&& (file = fopen(settingName, "w"))) {
+		int len = fwrite(&cfg, 1, sizeof(ConfigData), file);
+		fclose(file);
+		if (len == sizeof(ConfigData)) {
+			infoOutput("Settings saved.");
+			return 0;
+		}
+		infoOutput("Couldn't save settings.");
+	}
+	else {
+		infoOutput("Couldn't open file:");
+		infoOutput(settingName);
+	}
+	return 1;
 }
 
 int loadNVRAM() {
